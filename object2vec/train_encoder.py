@@ -39,6 +39,6 @@ if __name__ == '__main__':
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
 
     condition_features = mean_condition_features(args.stimuli_folder, feat_extractor)
-    subject = Subject('object2vec/subject_data/subj{:03}'.format(args.subject_number))
+    subject = Subject(args.subject_number)
     encoder = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
                               subject.n_voxels)

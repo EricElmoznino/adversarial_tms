@@ -4,6 +4,7 @@ import torch
 from helpers import utils
 from models import AlexNet, RegressionModel
 from object2vec.Subject import Subject
+from object2vec.regression import cv_regression
 
 
 def mean_condition_features(stimuli_folder, model):
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     parser.add_argument('--subject_number', default=1, type=int, help='subject number to train encoder for',
                         choices=[1, 2, 3, 4])
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
-    parser.add_argument('--feature_names', nargs='+', default='pool', type=str, help='feature extraction layers')
+    parser.add_argument('--feature_names', nargs='+', default=['pool'], type=str, help='feature extraction layers')
     args = parser.parse_args()
 
     run_name = '_'.join(['study=object2vec',
@@ -42,3 +43,9 @@ if __name__ == '__main__':
     subject = Subject(args.subject_number)
     encoder = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
                               subject.n_voxels)
+
+    weight, bias, r2, mse = cv_regression(condition_features, subject)
+    encoder.set_params(weight, bias)
+
+    print('Mean r2 score: {:.4f}'.format(r2))
+    print('Mean MSE: {:.4f}'.format(mse))

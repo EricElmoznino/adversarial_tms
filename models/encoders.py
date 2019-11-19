@@ -9,3 +9,7 @@ class RegressionModel(nn.Module):
 
     def forward(self, features):
         return self.linear(features)
+
+    def set_params(self, weight, bias):
+        self.linear.weight.data = weight
+        self.linear.bias.data = bias

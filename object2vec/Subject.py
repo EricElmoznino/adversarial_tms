@@ -8,10 +8,10 @@ class Subject:
                                     '/roistack.mat')['roistack']
 
         self.roi_names = [d[0] for d in roistack['rois'][0, 0][:, 0]]
+        self.conditions = [d[0] for d in roistack['conds'][0, 0][:, 0]]
 
-        conditions = [d[0] for d in roistack['conds'][0, 0][:, 0]]
         voxels = roistack['betas'][0, 0]
-        self.condition_voxels = {cond: voxels[i] for i, cond in enumerate(conditions)}
+        self.condition_voxels = {cond: voxels[i] for i, cond in enumerate(self.conditions)}
 
         self.n_voxels = voxels.shape[1]
 

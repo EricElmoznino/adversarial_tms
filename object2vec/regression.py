@@ -1,44 +1,42 @@
 import numpy as np
 import torch
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
 
 
 def cv_regression(condition_features, subject):
-    weights, biases, r2s, mses = [], [], [], []
+    weights, biases, rmats = [], [], []
 
     for test_conditions in subject.cv_sets:
         train_conditions = [c for c in subject.conditions if c not in test_conditions]
 
-        train_features = torch.stack([condition_features[c] for c in train_conditions])
-        test_features = torch.stack([condition_features[c] for c in test_conditions])
-        train_voxels = torch.stack([subject.condition_voxels[c] for c in train_conditions])
-        test_voxels = torch.stack([subject.condition_voxels[c] for c in test_conditions])
+        train_features = np.stack([condition_features[c].numpy() for c in train_conditions])
+        test_features = np.stack([condition_features[c].numpy() for c in test_conditions])
+        train_voxels = np.stack([subject.condition_voxels[c] for c in train_conditions])
+        test_voxels = np.stack([subject.condition_voxels[c] for c in test_conditions])
 
-        w, b, r2, mse = regression(train_features, train_voxels, test_features, test_voxels)
+        w, b, rmat = regression(train_features, train_voxels, test_features, test_voxels)
         weights.append(w)
         biases.append(b)
-        r2s.append(r2)
-        mses.append(mse)
+        rmats.append(rmat)
 
-    mean_weight = torch.cat(weights).mean(dim=0)
-    mean_bias = torch.cat(biases).mean(dim=0)
-    mean_r2 = np.mean(r2s)
-    mean_mse = np.mean(mses)
+    mean_weight = np.stack(weights).mean(axis=0)
+    mean_bias = np.stack(biases).mean(axis=0)
+    mean_weight = torch.from_numpy(mean_weight)
+    mean_bias = torch.from_numpy(mean_bias)
+    mean_r = np.mean(rmats)
 
-    return mean_weight, mean_bias, mean_r2, mean_mse
+    return mean_weight, mean_bias, mean_r
 
 
 def regression(x_train, y_train, x_test, y_test):
-    x_train, y_train = x_train.numpy(), y_train.numpy()
-    x_test, y_test = x_test.numpy(), y_test.numpy()
 
     regr = LinearRegression()
     regr.fit(x_train, y_train)
     y_pred = regr.predict(x_test)
 
-    weight, bias = torch.from_numpy(regr.coef_), torch.from_numpy(regr.intercept_)
-    r2 = r2_score(y_test, y_pred)
-    mse = mean_squared_error(y_test, y_pred)
+    weight, bias = regr.coef_, regr.intercept_
 
-    return weight, bias, r2, mse
+    zs = lambda v: (v - v.mean(0)) / v.std(0)
+    rmat = (zs(y_test) * zs(y_pred)).mean(axis=0)
+
+    return weight, bias, rmat

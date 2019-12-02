@@ -1,2 +1,3 @@
+from .Encoder import Encoder
 from .feature_extractors import AlexNet
-from .encoders import RegressionModel
+from .regressors import RegressionModel

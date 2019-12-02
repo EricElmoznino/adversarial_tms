@@ -1,21 +1,24 @@
 from argparse import ArgumentParser
 import os
+from tqdm import tqdm
 import torch
 from helpers import utils
-from models import AlexNet, RegressionModel
+from models import Encoder, AlexNet, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
 
 
 def mean_condition_features(stimuli_folder, model):
+    print('Extracting stimuli features')
     conditions = utils.listdir(stimuli_folder)
     condition_features = {}
-    for c in conditions:
+    for c in tqdm(conditions):
         c_name = c.split('/')[-1]
         stimuli = utils.listdir(c)
         stimuli = [utils.image_to_tensor(s) for s in stimuli]
         stimuli = torch.stack(stimuli)
-        feats = model(stimuli).mean(dim=0)
+        with torch.no_grad():
+            feats = model(stimuli).mean(dim=0)
         condition_features[c_name] = feats
     return condition_features
 
@@ -41,11 +44,13 @@ if __name__ == '__main__':
 
     condition_features = mean_condition_features(args.stimuli_folder, feat_extractor)
     subject = Subject(args.subject_number)
-    encoder = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
-                              subject.n_voxels)
+    regressor = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
+                                subject.n_voxels)
 
-    weight, bias, r2, mse = cv_regression(condition_features, subject)
-    encoder.set_params(weight, bias)
+    weight, bias, r = cv_regression(condition_features, subject)
+    regressor.set_params(weight, bias)
+    print('Mean r score: {:.4f}'.format(r))
 
-    print('Mean r2 score: {:.4f}'.format(r2))
-    print('Mean MSE: {:.4f}'.format(mse))
+    encoder = Encoder(feat_extractor, regressor)
+    encoder.eval()
+    torch.save(encoder, os.path.join('saved_models', run_name + '.pth'))

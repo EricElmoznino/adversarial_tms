@@ -29,14 +29,15 @@ def cv_regression(condition_features, subject):
 
 
 def regression(x_train, y_train, x_test, y_test):
-
     regr = LinearRegression()
     regr.fit(x_train, y_train)
     y_pred = regr.predict(x_test)
-
     weight, bias = regr.coef_, regr.intercept_
-
-    zs = lambda v: (v - v.mean(0)) / v.std(0)
-    rmat = (zs(y_test) * zs(y_pred)).mean(axis=0)
-
+    rmat = correlation(y_test, y_pred)
     return weight, bias, rmat
+
+
+def correlation(a, b):
+    zs = lambda v: (v - v.mean(0)) / v.std(0)
+    r = (zs(a) * zs(b)).mean(0)
+    return r

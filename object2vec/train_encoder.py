@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import os
 from tqdm import tqdm
 import torch
-from helpers import utils
+import utils
 from models import Encoder, AlexNet, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression

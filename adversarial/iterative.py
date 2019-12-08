@@ -41,4 +41,3 @@ def performance(orig, perturbed, model, target, loss_func):
               'perturbed_to_target': error_perturbed_target,
               'perturbed_to_original': error_perturbed_orig}
     return errors
-torch.nn.MSELoss

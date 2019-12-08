@@ -1,26 +1,10 @@
 from argparse import ArgumentParser
 import os
-from tqdm import tqdm
 import torch
 import utils
 from models import Encoder, AlexNet, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
-
-
-def mean_condition_features(stimuli_folder, model):
-    print('Extracting stimuli features')
-    conditions = utils.listdir(stimuli_folder)
-    condition_features = {}
-    for c in tqdm(conditions):
-        c_name = c.split('/')[-1]
-        stimuli = utils.listdir(c)
-        stimuli = [utils.image_to_tensor(s) for s in stimuli]
-        stimuli = torch.stack(stimuli)
-        with torch.no_grad():
-            feats = model(stimuli).mean(dim=0)
-        condition_features[c_name] = feats
-    return condition_features
 
 
 if __name__ == '__main__':
@@ -42,7 +26,7 @@ if __name__ == '__main__':
     else:
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
 
-    condition_features = mean_condition_features(args.stimuli_folder, feat_extractor)
+    condition_features = utils.mean_condition_features(args.stimuli_folder, feat_extractor)
     subject = Subject(args.subject_number)
     regressor = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
                                 subject.n_voxels)

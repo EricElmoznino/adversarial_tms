@@ -1,15 +1,15 @@
 import os
 from PIL import Image
-from tqdm import tqdm
 import torch
 from torchvision.transforms import functional as tr
 
 
-def listdir(dir):
+def listdir(dir, path=True):
     files = os.listdir(dir)
     files = [f for f in files if f != '.DS_Store']
     files = sorted(files)
-    files = [os.path.join(dir, f) for f in files]
+    if path:
+        files = [os.path.join(dir, f) for f in files]
     return files
 
 
@@ -36,18 +36,3 @@ def clamp_imagenet(image):
     high = (1 - mean) / std
     image = torch.max(torch.min(image, high), low)
     return image
-
-
-def mean_condition_features(stimuli_folder, model):
-    print('Extracting stimuli features')
-    conditions = listdir(stimuli_folder)
-    condition_features = {}
-    for c in tqdm(conditions):
-        c_name = c.split('/')[-1]
-        stimuli = listdir(c)
-        stimuli = [image_to_tensor(s) for s in stimuli]
-        stimuli = torch.stack(stimuli)
-        with torch.no_grad():
-            feats = model(stimuli).mean(dim=0)
-        condition_features[c_name] = feats
-    return condition_features

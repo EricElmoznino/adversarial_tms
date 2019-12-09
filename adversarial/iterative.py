@@ -34,10 +34,11 @@ def performance(orig, perturbed, model, target, loss_func):
     with torch.no_grad():
         orig_pred = model(orig)
         perturbed_pred = model(perturbed)
-    error_orig_target = loss_func(orig_pred, target, reduction='none').sum(dim=-1).cpu().numpy()
-    error_perturbed_target = loss_func(perturbed_pred, target, reduction='none').sum(dim=-1).cpu().numpy()
-    error_perturbed_orig = loss_func(perturbed_pred, orig_pred, reduction='none').sum(dim=-1).cpu().numpy()
-    errors = {'original_to_target': error_orig_target,
-              'perturbed_to_target': error_perturbed_target,
-              'perturbed_to_original': error_perturbed_orig}
+    error_orig_target = loss_func(orig_pred, target, reduction='none').sum(dim=-1).cpu().numpy().tolist()
+    error_perturbed_target = loss_func(perturbed_pred, target, reduction='none').sum(dim=-1).cpu().numpy().tolist()
+    error_perturbed_orig = loss_func(perturbed_pred, orig_pred, reduction='none').sum(dim=-1).cpu().numpy().tolist()
+    errors = [{'original_to_target': o_t,
+              'perturbed_to_target': p_t,
+              'perturbed_to_original': p_o}
+              for o_t, p_t, p_o in zip(error_orig_target, error_perturbed_target, error_perturbed_orig)]
     return errors

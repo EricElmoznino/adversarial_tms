@@ -4,7 +4,7 @@ from sklearn.linear_model import LinearRegression
 
 
 def cv_regression(condition_features, subject):
-    weights, biases, rmats = [], [], []
+    weights, rmats = [], []
 
     for test_conditions in subject.cv_sets:
         train_conditions = [c for c in subject.conditions if c not in test_conditions]
@@ -14,27 +14,24 @@ def cv_regression(condition_features, subject):
         train_voxels = np.stack([subject.condition_voxels[c] for c in train_conditions])
         test_voxels = np.stack([subject.condition_voxels[c] for c in test_conditions])
 
-        w, b, rmat = regression(train_features, train_voxels, test_features, test_voxels)
+        w, rmat = regression(train_features, train_voxels, test_features, test_voxels)
         weights.append(w)
-        biases.append(b)
         rmats.append(rmat)
 
     mean_weight = np.stack(weights).mean(axis=0)
-    mean_bias = np.stack(biases).mean(axis=0)
     mean_weight = torch.from_numpy(mean_weight)
-    mean_bias = torch.from_numpy(mean_bias)
     mean_r = np.mean(rmats)
 
-    return mean_weight, mean_bias, mean_r
+    return mean_weight, mean_r
 
 
 def regression(x_train, y_train, x_test, y_test):
-    regr = LinearRegression()
+    regr = LinearRegression(fit_intercept=False)
     regr.fit(x_train, y_train)
     y_pred = regr.predict(x_test)
-    weight, bias = regr.coef_, regr.intercept_
+    weight = regr.coef_
     rmat = correlation(y_test, y_pred)
-    return weight, bias, rmat
+    return weight, rmat
 
 
 def correlation(a, b):

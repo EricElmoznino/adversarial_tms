@@ -20,3 +20,6 @@ class Subject:
         sets = scipy.io.loadmat('object2vec/subject_data/subj{:03}'.format(subject_num) +
                                    '/sets.mat')['sets']
         self.cv_sets = [[cond[0] for cond in s[:, 0]] for s in sets[0, :]]
+
+    def mask_roi(self, voxels, roi):
+        return voxels[self.roi_masks[roi]]

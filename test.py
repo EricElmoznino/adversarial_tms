@@ -4,6 +4,8 @@ from utils import *
 from disruption import deepdream, roi_loss_func
 
 model = vgg16(pretrained=True)
+if torch.cuda.is_available():
+    model.cuda()
 layers = list(model.features.children())
 model = torch.nn.Sequential(*layers[: (27 + 1)])
 loss_func = roi_loss_func(towards_target=False)

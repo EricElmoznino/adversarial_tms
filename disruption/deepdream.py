@@ -40,8 +40,7 @@ def deepdream(orig, model, target, loss_func,
 
 def dream(input, model, target, loss_func,
           n_iter=10, alpha=0.01, max_jitter=32):
-    from tqdm import tqdm
-    for _ in tqdm(range(n_iter)):
+    for _ in range(n_iter):
         # Jitter shift for prior on correlated nearby pixels
         shift = np.random.randint(-max_jitter, max_jitter + 1, 2)
         input = torch.roll(input, shift.tolist(), [-2, -1])

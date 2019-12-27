@@ -47,8 +47,8 @@ def dream(input, model, target, loss_func,
           n_iter=10, alpha=0.01, max_jitter=32):
     for _ in range(n_iter):
         # Jitter shift for prior on correlated nearby pixels
-        shift = np.random.randint(-max_jitter, max_jitter + 1, 2)
-        input = torch.roll(input, shift.tolist(), [-2, -1])
+        # shift = np.random.randint(-max_jitter, max_jitter + 1, 2)
+        # input = torch.roll(input, shift.tolist(), [-2, -1])
 
         # Gradient with respect to input
         input.requires_grad = True
@@ -62,7 +62,7 @@ def dream(input, model, target, loss_func,
         input = input - alpha_scaled * input.grad
 
         # Reverse the jitter shift
-        input = torch.roll(input, (-shift).tolist(), [-2, -1])
+        # input = torch.roll(input, (-shift).tolist(), [-2, -1])
 
         # Clip image
         input = utils.clamp_imagenet(input)

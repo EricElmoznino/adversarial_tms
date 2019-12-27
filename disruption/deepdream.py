@@ -21,6 +21,7 @@ def deepdream(orig, model, target, loss_func,
         img = octaves[-1].cpu().numpy()
         img = nd.zoom(img, (1, 1, 1 / octave_scale, 1 / octave_scale), order=1)
         img = torch.from_numpy(img).to(target.device)
+        octaves.append(img)
 
     detail = None
     for octave_base in octaves[::-1]:

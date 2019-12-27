@@ -48,7 +48,7 @@ def dream(input, model, target, loss_func,
         # Gradient with respect to input
         input.requires_grad = True
         pred = model(input)
-        loss = loss_func(pred, torch.zeros_like(pred))
+        loss = loss_func(pred, target)
         loss.backward()
 
         # Disrupt the image

@@ -14,15 +14,14 @@ target = torch.nn.functional.one_hot(torch.tensor([245]), 1000).float().squeeze(
 pert = deepdream(img, model, target, loss_func,
                  n_octave=6, octave_scale=1.4, alpha=0.01, n_iter=20)
 
-pert = tensor_to_image(pert)
-pert.save('/home/eelmozn1/Downloads/output.jpg')
+tensor_to_image(pert).save('/home/eelmozn1/Downloads/output.jpg')
 
 model.cpu()
 
 print('\nOriginal loss:')
-l = loss_func(model(image_to_tensor(img).unsqueeze(0)), target.unsqueeze(0))
+l = loss_func(model(img.unsqueeze(0)), target.unsqueeze(0))
 print(l)
 
 print('\nNew loss:')
-l = loss_func(model(image_to_tensor(pert).unsqueeze(0)), target.unsqueeze(0))
+l = loss_func(model(pert.unsqueeze(0)), target.unsqueeze(0))
 print(l)

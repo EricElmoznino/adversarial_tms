@@ -8,7 +8,8 @@ import numpy as np
 import torch
 import utils
 from object2vec.Subject import Subject
-from adversarial import iterative_perturbation
+from disruption import deepdream
+from disruption import roi_loss_func
 
 torch.manual_seed(27)
 batch_size = 32
@@ -93,12 +94,12 @@ def make_adversarial_examples(save_folder, inputs, encoder, roi_mask, targeted):
 
 if __name__ == '__main__':
     parser = ArgumentParser(description='Adversarial perturbations')
-    parser.add_argument('--save_folder', required=True, type=str, help='folder to save adversarial examples')
+    parser.add_argument('--save_folder', required=True, type=str, help='folder to save disrupted examples')
     parser.add_argument('--stimuli_folder', required=True, type=str, help='folder containing the stimuli images')
     parser.add_argument('--specification_file', required=True, type=str,
-                        help='file specifying which adversarial examples to generate')
+                        help='file specifying which disrupted examples to generate')
     parser.add_argument('--roi', required=True, type=str, choices=['LOC', 'PPA'],
-                        help='roi to generate advesarial examples for')
+                        help='roi to generate disrupted examples for')
     parser.add_argument('--targeted', action='store_true',
                         help='whether or not to specifically target roi by leaving other rois constant')
     parser.add_argument('--encoder_file', required=True, type=str, help='path to the encoder file')
@@ -117,7 +118,7 @@ if __name__ == '__main__':
     adversarial_inputs = get_adversarial_inputs(args.stimuli_folder, stimuli, subject, args.specification_file)
 
     for encoder_name in encoders:
-        print('Generating adversarial examples using: {}'.format(encoder_name))
+        print('Generating disruption examples using: {}'.format(encoder_name))
         save_folder = os.path.join(args.save_folder, encoder_name)
         os.mkdir(save_folder)
         make_adversarial_examples(save_folder, adversarial_inputs, encoders[encoder_name],

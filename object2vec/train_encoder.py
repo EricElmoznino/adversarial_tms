@@ -15,7 +15,7 @@ def mean_condition_features(stimuli_folder, model):
     for c in tqdm(conditions):
         c_name = c.split('/')[-1]
         stimuli = utils.listdir(c)
-        stimuli = [utils.image_to_tensor(s) for s in stimuli]
+        stimuli = [utils.image_to_tensor(s, resolution=(224, 224)) for s in stimuli]
         stimuli = torch.stack(stimuli)
         with torch.no_grad():
             feats = model(stimuli).mean(dim=0)

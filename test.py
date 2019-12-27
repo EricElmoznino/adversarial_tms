@@ -17,10 +17,12 @@ pert = deepdream(img, model, target, loss_func,
 pert = tensor_to_image(pert)
 pert.save('/home/eelmozn1/Downloads/output.jpg')
 
+model.cpu()
+
 print('\nOriginal loss:')
-l = loss_func(model(img.unsqueeze(0)), target.unsqueeze(0).to(img.device))
+l = loss_func(model(img.unsqueeze(0)), target.unsqueeze(0))
 print(l)
 
 print('\nNew loss:')
-l = loss_func(model(pert.unsqueeze(0)), target.unsqueeze(0).to(pert.device))
+l = loss_func(model(pert.unsqueeze(0)), target.unsqueeze(0))
 print(l)

@@ -18,9 +18,9 @@ pert = tensor_to_image(pert)
 pert.save('/home/eelmozn1/Downloads/output.jpg')
 
 print('\nOriginal loss:')
-l = loss_func(model(img.unsqueeze(0)), target.unsqueeze(0))
+l = loss_func(model(img.unsqueeze(0)), target.unsqueeze(0).to(img.device))
 print(l)
 
 print('\nNew loss:')
-l = loss_func(model(pert.unsqueeze(0)), target.unsqueeze(0))
+l = loss_func(model(pert.unsqueeze(0)), target.unsqueeze(0).to(pert.device))
 print(l)

@@ -1,9 +1,9 @@
 import torch
-from torchvision.models.alexnet import alexnet
+from torchvision.models.vgg import vgg16
 from utils import *
 from disruption import deepdream, roi_loss_func
 
-model = alexnet(pretrained=True)
+model = vgg16(pretrained=True)
 if torch.cuda.is_available():
     model.cuda()
 loss_func = roi_loss_func()

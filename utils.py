@@ -26,7 +26,7 @@ def image_to_tensor(image, resolution=None):
 def tensor_to_image(image):
     mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
     std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32).view(3, 1, 1)
-    mean.device = std.device = image.device
+    image = image.cpu()
     image = image * std + mean  # ImageNet normalization
     image = tr.to_pil_image(image)
     return image
@@ -35,6 +35,7 @@ def tensor_to_image(image):
 def clamp_imagenet(image):
     mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
     std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32).view(3, 1, 1)
+    mean.device = std.device = image.device
     low = (0 - mean) / std
     high = (1 - mean) / std
     image = torch.max(torch.min(image, high), low)

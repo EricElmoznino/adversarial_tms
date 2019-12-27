@@ -16,5 +16,5 @@ pert = deepdream(img, model, torch.zeros(1000), loss_func,
                  n_octave=10, octave_scale=1.4, alpha=0.01, n_iter=20)
 
 pert = tensor_to_image(pert)
-pert.show()
+pert.save('/home/eelmozn1/Downloads/output.jpg')
 

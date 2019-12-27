@@ -8,7 +8,7 @@ if torch.cuda.is_available():
     model.cuda()
 loss_func = roi_loss_func()
 
-img = image_to_tensor('/home/eric/Downloads/sky1024px.jpg')
+img = image_to_tensor('/home/eelmozn1/Downloads/sky1024px.jpg')
 
 pert = deepdream(img, model, torch.nn.functional.one_hot(torch.tensor([245]), 1000).float().squeeze(0), loss_func,
                  n_octave=4, octave_scale=1.4, alpha=0.01)

@@ -1,14 +1,13 @@
 import torch
-from torchvision.models.vgg import vgg16
+from torchvision.models.alexnet import alexnet
 from utils import *
 from disruption import deepdream, roi_loss_func
 
-model = vgg16(pretrained=True)
+model = alexnet(pretrained=True)
+model = model.features
 if torch.cuda.is_available():
     model.cuda()
-layers = list(model.features.children())
-model = torch.nn.Sequential(*layers[: (27 + 1)])
-loss_func = roi_loss_func(towards_target=False, loss_func=torch.nn.functional.l1_loss)
+loss_func = roi_loss_func(towards_target=False)
 
 img = image_to_tensor('/home/eelmozn1/Downloads/sky1024px.jpg')
 

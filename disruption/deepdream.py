@@ -33,7 +33,7 @@ def deepdream(orig, model, target, loss_func,
         detail = output - octave_base
 
     dreamed = detail + orig
-    dreamed = dreamed.squeeze(0)
+    dreamed = dreamed.squeeze(0).cpu()
 
     return dreamed
 

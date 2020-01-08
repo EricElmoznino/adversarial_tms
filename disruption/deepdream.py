@@ -4,8 +4,8 @@ import numpy as np
 import utils
 
 
-def deepdream(orig, model, target, loss_func,
-              n_octave, octave_scale,
+def deepdream(orig, target, model, loss_func,
+              n_octave=6, octave_scale=1.4,
               n_iter=10, alpha=0.01, max_jitter=32):
     orig = orig.unsqueeze(0)
     target = target.unsqueeze(0)

@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 import torch
 import utils
-from models import Encoder, AlexNet, RegressionModel
+from models import Encoder, AlexNet, VGG16, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
 
@@ -39,6 +39,8 @@ if __name__ == '__main__':
 
     if args.feature_extractor == 'alexnet':
         feat_extractor = AlexNet(args.feature_names)
+    elif args.feature_extractor == 'vgg16':
+        feat_extractor = VGG16(args.feature_names)
     else:
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
 

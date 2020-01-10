@@ -35,7 +35,7 @@ def deepdream(orig, target, model, loss_func,
     dreamed = detail + orig
     dreamed = dreamed.squeeze(0).cpu()
 
-    return dreamed
+    return dreamed.cpu()
 
 
 def dream(input, model, target, loss_func,

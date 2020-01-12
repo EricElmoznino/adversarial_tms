@@ -3,6 +3,8 @@ from torch.nn import functional as F
 import numpy as np
 import utils
 
+np.random.seed(27)
+
 
 def deepdream(orig, target, model, loss_func,
               n_octave=6, octave_scale=1.4,

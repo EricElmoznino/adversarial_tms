@@ -7,6 +7,8 @@ from models import Encoder, AlexNet, VGG16, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
 
+resolution = 480
+
 
 def mean_condition_features(stimuli_folder, model):
     print('Extracting stimuli features')
@@ -15,7 +17,7 @@ def mean_condition_features(stimuli_folder, model):
     for c in tqdm(conditions):
         c_name = c.split('/')[-1]
         stimuli = utils.listdir(c)
-        stimuli = [utils.image_to_tensor(s, resolution=(224, 224)) for s in stimuli]
+        stimuli = [utils.image_to_tensor(s, resolution=resolution) for s in stimuli]
         stimuli = torch.stack(stimuli)
         with torch.no_grad():
             feats = model(stimuli).mean(dim=0)

@@ -19,16 +19,26 @@ def image_to_tensor(image, resolution=None):
     if resolution is not None:
         image = tr.resize(image, resolution)
     image = tr.to_tensor(image)
-    image = tr.normalize(image, mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))  # ImageNet normalization
+    image = imagenet_norm(image)
     return image
 
 
 def tensor_to_image(image):
+    image = imagenet_unnorm(image)
+    image = tr.to_pil_image(image)
+    return image
+
+
+def imagenet_norm(image):
+    image = tr.normalize(image, mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))  # ImageNet normalization
+    return image
+
+
+def imagenet_unnorm(image):
     mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
     std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32).view(3, 1, 1)
     image = image.cpu()
     image = image * std + mean  # ImageNet normalization
-    image = tr.to_pil_image(image)
     return image
 
 

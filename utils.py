@@ -18,6 +18,9 @@ def image_to_tensor(image, resolution=None):
         image = Image.open(image).convert('RGB')
     if resolution is not None:
         image = tr.resize(image, resolution)
+    if image.width != image.height:
+        r = min(image.width, image.height)
+        image = tr.center_crop(image, (r, r))
     image = tr.to_tensor(image)
     image = imagenet_norm(image)
     return image

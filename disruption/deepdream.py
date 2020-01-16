@@ -7,8 +7,8 @@ np.random.seed(27)
 
 
 def deepdream(orig, target, model, loss_func,
-              n_octave=6, octave_scale=1.4,
-              n_iter=10, alpha=0.01, max_jitter=32):
+              n_octave=1, octave_scale=1.4,
+              n_iter=10, alpha=0.05, max_jitter=32):
     orig = orig.unsqueeze(0)
     target = target.unsqueeze(0)
     if torch.cuda.is_available():

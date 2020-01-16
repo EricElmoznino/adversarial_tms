@@ -6,10 +6,10 @@ from torchvision.models.vgg import vgg16 as vgg16_pretrained
 
 class AlexNet(nn.Module):
 
-    def __init__(self, feature_names):
+    def __init__(self, feature_name):
         super().__init__()
 
-        self.feature_names = feature_names
+        self.feature_name = feature_name
         base = alexnet_pretrained(pretrained=True)
 
         self.conv_1 = base.features[:3]
@@ -25,57 +25,90 @@ class AlexNet(nn.Module):
         self.eval()
 
     def forward(self, stimuli):
-        feats = []
-
         x = self.conv_1(stimuli)
-        if 'conv_1' in self.feature_names: feats.append(x)
+        if 'conv_1' == self.feature_name: return x.view(x.shape[0], -1)
         x = self.conv_2(x)
-        if 'conv_2' in self.feature_names: feats.append(x)
+        if 'conv_2' == self.feature_name: return x.view(x.shape[0], -1)
         x = self.conv_3(x)
-        if 'conv_3' in self.feature_names: feats.append(x)
+        if 'conv_3' == self.feature_name: return x.view(x.shape[0], -1)
         x = self.conv_4(x)
-        if 'conv_4' in self.feature_names: feats.append(x)
+        if 'conv_4' == self.feature_name: return x.view(x.shape[0], -1)
         x = self.conv_5(x)
-        if 'conv_5' in self.feature_names: feats.append(x)
+        if 'conv_5' == self.feature_name: return x.view(x.shape[0], -1)
         x = self.avgpool(x)
         x = x.view(x.shape[0], -1)
-        if 'pool' in self.feature_names: feats.append(x)
+        if 'pool' == self.feature_name: return x
         x = self.fc_1(x)
-        if 'fc_1' in self.feature_names: feats.append(x)
+        if 'fc_1' == self.feature_name: return x
         x = self.fc_2(x)
-        if 'fc_2' in self.feature_names: feats.append(x)
+        if 'fc_2' == self.feature_name: return x
         x = self.fc_3(x)
-        if 'fc_3' in self.feature_names: feats.append(x)
-
-        assert len(feats) == len(self.feature_names)
-        feats = [f.view(f.shape[0], -1) for f in feats]
-        feats = torch.cat(feats, dim=1)
-
-        return feats
+        if 'fc_3' == self.feature_name: return x
+        return None
 
 
 class VGG16(nn.Module):
 
-    def __init__(self, feature_names):
+    def __init__(self, feature_name):
         super().__init__()
 
-        self.feature_names = feature_names
-        self.base = vgg16_pretrained(pretrained=True)
+        self.feature_name = feature_name
+        base = vgg16_pretrained(pretrained=True)
+
+        self.conv_1 = base.features[:2]
+        self.conv_2 = base.features[2:5]
+        self.conv_3 = base.features[5:7]
+        self.conv_4 = base.features[7:10]
+        self.conv_5 = base.features[10:12]
+        self.conv_6 = base.features[12:14]
+        self.conv_7 = base.features[14:17]
+        self.conv_8 = base.features[17:19]
+        self.conv_9 = base.features[19:21]
+        self.conv_10 = base.features[21:24]
+        self.conv_11 = base.features[24:26]
+        self.conv_12 = base.features[26:28]
+        self.conv_13 = base.features[28:]
+        self.avgpool = base.avgpool
+        self.fc_1 = base.classifier[:3]
+        self.fc_2 = base.classifier[3:6]
+        self.fc_3 = base.classifier[6:]
 
         self.eval()
 
     def forward(self, stimuli):
-        feats = []
-
-        x = self.base.features(stimuli)
-        x = self.base.avgpool(x)
+        x = self.conv_1(stimuli)
+        if 'conv_1' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_2(x)
+        if 'conv_2' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_3(x)
+        if 'conv_3' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_4(x)
+        if 'conv_4' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_5(x)
+        if 'conv_5' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_6(x)
+        if 'conv_6' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_7(x)
+        if 'conv_7' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_8(x)
+        if 'conv_8' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_9(x)
+        if 'conv_9' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_10(x)
+        if 'conv_10' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_11(x)
+        if 'conv_11' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_12(x)
+        if 'conv_12' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.conv_13(x)
+        if 'conv_13' == self.feature_name: return x.view(x.shape[0], -1)
+        x = self.avgpool(x)
         x = x.view(x.shape[0], -1)
-        if 'pool' in self.feature_names: feats.append(x)
-        x = self.base.classifier(x)
-        if 'fc' in self.feature_names: feats.append(x)
-
-        assert len(feats) == len(self.feature_names)
-        feats = [f.view(f.shape[0], -1) for f in feats]
-        feats = torch.cat(feats, dim=1)
-
-        return feats
+        if 'pool' == self.feature_name: return x
+        x = self.fc_1(x)
+        if 'fc_1' == self.feature_name: return x
+        x = self.fc_2(x)
+        if 'fc_2' == self.feature_name: return x
+        x = self.fc_3(x)
+        if 'fc_3' == self.feature_name: return x
+        return None

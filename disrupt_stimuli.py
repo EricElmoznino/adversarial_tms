@@ -20,7 +20,7 @@ def disrupt_stimulus(stimulus, target, encoder, roi_mask, towards_target):
         orig_voxels = encoder(stimulus.unsqueeze(0)).squeeze(0)
     target[1 - roi_mask] = orig_voxels[1 - roi_mask]
 
-    disrupted = deepdream(stimulus, target, encoder, loss_func, n_octave=1)
+    disrupted = deepdream(stimulus, target, encoder, loss_func)
     metrics = loss_metrics(stimulus, disrupted, target, encoder, roi_mask)
 
     return disrupted, metrics
@@ -30,8 +30,9 @@ if __name__ == '__main__':
     parser = ArgumentParser(description='Stimulus disruptions')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save disrupted images')
     parser.add_argument('--stimuli_folder', required=True, type=str, help='folder containing stimulus images')
+    parser.add_argument('--targets_folder', required=True, type=str, help='folder containing voxel targets')
     parser.add_argument('--encoder_file', required=True, type=str, help='path to the encoder file')
-    parser.add_argument('--roi', required=True, type=str, choices=['LOC', 'PPA'],
+    parser.add_argument('--roi', required=True, type=str, choices=['LOC', 'PPA', 'all'],
                         help='ROI being targeted for disruption')
     parser.add_argument('--towards_target', action='store_true',
                         help='whether to disrupt voxels away from target or towards it')
@@ -42,19 +43,20 @@ if __name__ == '__main__':
 
     stimuli = os.listdir(args.stimuli_folder)
     stimuli = [s for s in stimuli if s != '.DS_Store']
-    stimuli = [s for s in stimuli if '.target.pth' not in s]
 
     if args.roi == 'LOC':
         roi_mask = np.array([False for _ in range(100)] + [True for _ in range(100)])
-    else:
+    elif args.roi == 'PPA':
         roi_mask = np.array([True for _ in range(100)] + [False for _ in range(100)])
+    else:
+        roi_mask = np.array([True for _ in range(200)])
 
     encoder = torch.load(os.path.join('saved_models', args.encoder_file))
 
     print('Generating disruption examples')
     for stimulus_name in tqdm(stimuli):
         stimulus = utils.image_to_tensor(os.path.join(args.stimuli_folder, stimulus_name), resolution)
-        target = torch.load(os.path.join(args.stimuli_folder, stimulus_name + '.target.pth'))
+        target = torch.load(os.path.join(args.targets_folder, stimulus_name + '.target.pth'))
         disrupted, metrics = disrupt_stimulus(stimulus, target, encoder, roi_mask, args.towards_target)
 
         shutil.copyfile(os.path.join(args.stimuli_folder, stimulus_name),

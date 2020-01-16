@@ -31,18 +31,18 @@ if __name__ == '__main__':
     parser.add_argument('--subject_number', default=1, type=int, help='subject number to train encoder for',
                         choices=[1, 2, 3, 4])
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
-    parser.add_argument('--feature_names', nargs='+', default=['pool'], type=str, help='feature extraction layers')
+    parser.add_argument('--feature_name', default='pool', type=str, help='feature extraction layer')
     args = parser.parse_args()
 
     run_name = '_'.join(['study=object2vec',
                          'subj={:03}'.format(args.subject_number),
                          'featextractor={}'.format(args.feature_extractor),
-                         'featnames={}'.format(','.join(args.feature_names))])
+                         'featname={}'.format(args.feature_name)])
 
     if args.feature_extractor == 'alexnet':
-        feat_extractor = AlexNet(args.feature_names)
+        feat_extractor = AlexNet(args.feature_name)
     elif args.feature_extractor == 'vgg16':
-        feat_extractor = VGG16(args.feature_names)
+        feat_extractor = VGG16(args.feature_name)
     else:
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
 

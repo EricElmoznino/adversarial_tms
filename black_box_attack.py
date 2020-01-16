@@ -29,7 +29,7 @@ if __name__ == '__main__':
 
     disrupted_stimuli = os.listdir(args.disrupted_folder)
     disrupted_stimuli = [d for d in disrupted_stimuli if '_disrupted.' in d]
-    original_stimuli = [d.replace('_disrupted.', '.') for d in disrupted_stimuli]
+    original_stimuli = [d.replace('_disrupted.', '_original.') for d in disrupted_stimuli]
 
     if args.roi == 'LOC':
         roi_mask = np.array([False for _ in range(100)] + [True for _ in range(100)])

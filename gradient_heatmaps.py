@@ -1,15 +1,14 @@
 from argparse import ArgumentParser
 import os
 import shutil
-import json
-from tqdm import tqdm
 import numpy as np
+from tqdm import tqdm
 import torch
 from torch.nn import functional as F
 from torchvision.transforms import functional as tr
 import utils
 
-resolution = 480
+resolution = 375
 
 
 def make_heatmaps(stimulus, loc_grad, ppa_grad):
@@ -25,7 +24,7 @@ def make_heatmaps(stimulus, loc_grad, ppa_grad):
     ppa = ppa_grad.abs()
     ppa = ppa.sum(dim=0)
     ppa = ppa / ppa.max()
-    ppa = torch.stack((torch.zeros_like(ppa), torch.zeros_like(ppa), ppa))
+    ppa = torch.stack((torch.zeros_like(ppa), ppa, torch.zeros_like(ppa)))
     ppa_heatmap = 0.2 * stimulus + 0.8 * ppa
     ppa_heatmap = tr.to_pil_image(ppa_heatmap)
 
@@ -34,7 +33,7 @@ def make_heatmaps(stimulus, loc_grad, ppa_grad):
     dif = dif / dif.abs().max()
     loc_selective = dif.clamp(min=0)
     ppa_selective = -dif.clamp(max=0)
-    pixel_selectiveness = torch.stack((loc_selective, torch.zeros_like(loc_selective), ppa_selective))
+    pixel_selectiveness = torch.stack((loc_selective, ppa_selective, torch.zeros_like(loc_selective)))
     selectivity_heatmap = 0.2 * stimulus + 0.8 * pixel_selectiveness
     selectivity_heatmap = tr.to_pil_image(selectivity_heatmap)
 
@@ -56,8 +55,8 @@ if __name__ == '__main__':
 
     encoder = torch.load(os.path.join('saved_models', args.encoder_file))
 
-    loc_mask = torch.tensor([0 for _ in range(100)] + [1 for _ in range(100)], dtype=torch.uint8)
-    ppa_mask = torch.tensor([1 for _ in range(100)] + [0 for _ in range(100)], dtype=torch.uint8)
+    loc_mask = torch.from_numpy(utils.get_roi_mask('LOC', args.encoder_file).astype(np.uint8))
+    ppa_mask = torch.from_numpy(utils.get_roi_mask('PPA', args.encoder_file).astype(np.uint8))
 
     for stimulus_name in tqdm(stimuli):
         stimulus = utils.image_to_tensor(os.path.join(args.stimuli_folder, stimulus_name), resolution).unsqueeze(0)

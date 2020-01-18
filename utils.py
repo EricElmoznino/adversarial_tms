@@ -1,4 +1,5 @@
 import os
+import numpy as np
 from PIL import Image
 import torch
 from torchvision.transforms import functional as tr
@@ -54,3 +55,23 @@ def clamp_imagenet(image):
     high = (1 - mean) / std
     image = torch.max(torch.min(image, high), low)
     return image
+
+
+def get_roi_mask(roi, encoder_file):
+    voxel_sizes = {'object2vec': {'LOC': 100, 'PPA': 100},
+                   'bold5000': {'LOC': 409, 'PPA': 401, 'EVC': 402, 'OPA': 410, 'RSC': 403}}
+    study = encoder_file.split('_')[0].split('=')[-1]
+    rois = encoder_file.split('.')[0].split('_')[-1].split('=')[-1].split(',')
+    roi_mask = []
+    for r in rois:
+        roi_mask += [r == roi for _ in range(voxel_sizes[study][r])]
+    roi_mask = np.array(roi_mask)
+    return roi_mask
+
+
+def get_run_name(feature_extractor, feature_name, rois):
+    run_name = '_'.join(['study=bold5000',
+                         'featextractor={}'.format(feature_extractor),
+                         'featname={}'.format(feature_name),
+                         'rois={}'.format(','.join(rois))])
+    return run_name

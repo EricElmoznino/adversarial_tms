@@ -7,7 +7,7 @@ from models import Encoder, AlexNet, VGG16, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
 
-resolution = 480
+resolution = 375
 
 
 def mean_condition_features(stimuli_folder, model):
@@ -32,12 +32,8 @@ if __name__ == '__main__':
                         choices=[1, 2, 3, 4])
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='pool', type=str, help='feature extraction layer')
+    parser.add_argument('--rois', nargs='+', default=['LOC', 'PPA'], type=str, help='ROIs to fit')
     args = parser.parse_args()
-
-    run_name = '_'.join(['study=object2vec',
-                         'subj={:03}'.format(args.subject_number),
-                         'featextractor={}'.format(args.feature_extractor),
-                         'featname={}'.format(args.feature_name)])
 
     if args.feature_extractor == 'alexnet':
         feat_extractor = AlexNet(args.feature_name)
@@ -46,8 +42,8 @@ if __name__ == '__main__':
     else:
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
 
+    subject = Subject(args.subject_number, args.rois)
     condition_features = mean_condition_features(args.stimuli_folder, feat_extractor)
-    subject = Subject(args.subject_number)
     regressor = RegressionModel(condition_features[list(condition_features.keys())[0]].shape[0],
                                 subject.n_voxels)
 
@@ -57,4 +53,5 @@ if __name__ == '__main__':
 
     encoder = Encoder(feat_extractor, regressor)
     encoder.eval()
+    run_name = utils.get_run_name(args.feature_extractor, args.feature_name, args.rois)
     torch.save(encoder, os.path.join('saved_models', run_name + '.pth'))

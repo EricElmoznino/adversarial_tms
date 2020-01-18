@@ -8,7 +8,7 @@ import utils
 from disruption import loss_metrics
 
 torch.manual_seed(27)
-resolution = 480
+resolution = 375
 
 
 def plot_compare_dists(dist1, dist2, name1, name2, title):
@@ -31,11 +31,7 @@ if __name__ == '__main__':
     disrupted_stimuli = [d for d in disrupted_stimuli if '_disrupted.' in d]
     original_stimuli = [d.replace('_disrupted.', '_original.') for d in disrupted_stimuli]
 
-    if args.roi == 'LOC':
-        roi_mask = np.array([False for _ in range(100)] + [True for _ in range(100)])
-    else:
-        roi_mask = np.array([True for _ in range(100)] + [False for _ in range(100)])
-    roi_mask = torch.from_numpy(roi_mask.astype(np.uint8))
+    roi_mask = torch.from_numpy(utils.get_roi_mask(args.roi, args.encoder_file).astype(np.uint8))
 
     encoder = torch.load(os.path.join('saved_models', args.encoder_file))
 
@@ -51,6 +47,5 @@ if __name__ == '__main__':
             on_roi_distances.append(metrics['Disrupted to Target (ON ROI)'])
             off_roi_distances.append(metrics['Disrupted to Target (OFF ROI)'])
 
-    off_roi = 'PPA' if args.roi == 'LOC' else 'LOC'
-    plot_compare_dists(on_roi_distances, off_roi_distances, args.roi + ' disruption', off_roi + ' disruption',
+    plot_compare_dists(on_roi_distances, off_roi_distances, args.roi + ' disruption', 'OFF ROI disruption',
                        'Black-box adversarial attack (disrupting {})'.format(args.roi))

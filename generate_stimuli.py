@@ -8,7 +8,7 @@ import utils
 from disruption import deepdream, roi_loss_func, loss_metrics
 
 torch.manual_seed(27)
-resolution = 480
+resolution = 375
 
 
 def generate_stimulus(target, encoder):

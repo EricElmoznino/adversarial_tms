@@ -20,7 +20,10 @@ def disrupt_stimulus(stimulus, target, encoder, roi_mask, towards_target, random
         if random:
             encoder = encoder.random_weights()
         orig_voxels = encoder(stimulus.unsqueeze(0)).squeeze(0)
-    target[1 - roi_mask] = orig_voxels[1 - roi_mask]
+    if random and not towards_target:
+        target = orig_voxels
+    else:
+        target[1 - roi_mask] = orig_voxels[1 - roi_mask]
 
     disrupted = deepdream(stimulus, target, encoder, loss_func)
     metrics = loss_metrics(stimulus, disrupted, target, encoder, roi_mask)

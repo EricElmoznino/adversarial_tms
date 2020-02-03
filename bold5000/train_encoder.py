@@ -86,5 +86,5 @@ if __name__ == '__main__':
 
     encoder = Encoder(feat_extractor, regressor)
     encoder.eval()
-    run_name = utils.get_run_name(args.feature_extractor, args.feature_name, args.rois)
+    run_name = utils.get_run_name('bold5000', args.feature_extractor, args.feature_name, args.rois)
     torch.save(encoder, os.path.join('saved_models', run_name + '.pth'))

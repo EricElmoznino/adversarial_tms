@@ -69,7 +69,7 @@ def get_roi_mask(roi, encoder_file):
     return roi_mask
 
 
-def get_run_name(feature_extractor, feature_name, rois):
+def get_run_name(study, feature_extractor, feature_name, rois):
     run_name = '_'.join(['study=bold5000',
                          'featextractor={}'.format(feature_extractor),
                          'featname={}'.format(feature_name),

@@ -1,0 +1,18 @@
+{
+  "stimuli": [
+    {"image": "n01491361_3094.JPEG", "trueCat": "shark"},
+    {"image": "n01817953_6235.JPEG", "trueCat": "parrot"},
+    {"image": "n02109525_2943.JPEG", "trueCat": "dog"},
+    {"image": "n02123159_1673.JPEG", "trueCat": "cat"},
+    {"image": "n02281787_391.JPEG", "trueCat": "butterfly"},
+    {"image": "n02504458_12555.JPEG", "trueCat": "elephant"},
+    {"image": "n02950826_22506.JPEG", "trueCat": "cannon"},
+    {"image": "n02977058_7588.JPEG", "trueCat": "atm"},
+    {"image": "n03016953_1536.JPEG", "trueCat": "dresser"}
+  ],
+  "foilCategories": [
+    "foil1",
+    "foil2",
+    "foil3"
+  ]
+}

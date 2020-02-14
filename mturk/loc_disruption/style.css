@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, Helvetica;
+  font-size: 14pt;
+}
+
+.container{
+	position: relative;
+	top:5px;
+	margin: 0 auto;
+	width:700px;
+	border: 2px solid gray;
+	text-align: center;
+}
+
+#instructions{
+	margin: 0 auto;
+	width: 680px;
+	font-size: 16px;
+}
+
+#startExperiment {
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
+#startExperiment:hover {
+  color: white;
+}
+
+.button {
+  width: 200px;
+  text-align: center;
+  background: gray;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+#nextTrialButton {
+    display: none;
+}
+
+#training {
+    text-align: center;
+}
+
+#trainEndWarning {
+    display: none;
+    color: red;
+}
+.trialDiv {
+  padding: 20px;
+  width: 500px;
+  margin: 0 auto;
+  display: none;
+  text-align: center;
+}
+
+#trialOptions{
+    display: none;
+    text-align: center;
+    padding: 20px;
+    margin-top: 80px;
+    border: 2px solid gray;
+}
+
+.option {
+    padding: 5px 20px;
+    margin: 5px auto;
+}

@@ -1,0 +1,45 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="script.js"></script>
+
+<div class="container" id="instructionsContainer">
+    <div id="instructions">
+        <h2>Welcome to our study!</h2>
+        <p>This is a psychology experiment in which you will be <b>presented images</b> for a very <b>short interval</b>, after which you will need to <b>classify</b> what you saw by choosing between two options. You will be able to select your option by using the <b>'D'</b> and <b>'K'</b> keys on your keyboard. After you make your selection, you will be able to press the <b>'Space'</b> key to continue to the next image. The task will take about <b>1 minute</b> to complete.</p>
+        <p>Before the task begins, we will begin with a brief <b>training session</b>. This training session will be identical to the actual experiment in every way, except that your responses will not be recorded. The purpose of the training session is to give you a better understanding of the task.</p>
+        <h2>Consent</h2>
+        <p>This task is completely anonymous. By completing the task, you are consenting to be in this research study. Your participation is voluntary and you can stop at any time. If you are ready, check the box below to indicate your consent.</p>
+        <p><input type="checkbox" name="consent_check" value="agree" id="consent"> I agree to participate. </p>
+        <div id="startExperimentButton" class="button">
+            <a href="#" id="startExperiment">Ready to begin!</a>
+        </div>
+    </div>
+</div>
+
+<div id="trial" class="trialDiv">
+    <h2 id="sessionMode">Training segment</h2>
+    <img width="375" id="fixation" src="https://roi-disruption.s3.amazonaws.com/loc_disruption/assets/fixation.jpg">
+    <img width="375" id="trialImage" src="">
+    <div id="trialOptions">
+        <h3>What did you see?</h3>
+        <p class="option" id="option1box">Press 'D' for: <strong id="option1"></strong></p>
+        <p class="option" id="option2box">Press 'K' for: <strong id="option2"></strong></p>
+    </div>
+    <div id="trainEndWarning">
+        <h2>Warning!!!</h2>
+        <p>This was the last trial in the training session. The experiment begins on the next presented image</p>
+    </div>
+    <div id="nextTrialButton" class="button">
+        <p>Press 'Space' to continue</p>
+    </div>
+</div>
+
+<input type="hidden" id="trialResponses" name="trialResponses" value="">
+<input type="hidden" id="displayedImages" name="displayedImages" value="">
+<input type="hidden" id="types" name="types" value="">
+<input type="hidden" id="trueCats" name="trueCats" value="">
+<input type="hidden" id="foilCats" name="foilCats" value="">
+<input type="hidden" id="reactionTimes" name="reactionTimes" value="">
+
+<!-- do not put this on Turk -->
+<input type="submit" id="submitButton">

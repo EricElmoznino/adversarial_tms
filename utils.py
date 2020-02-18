@@ -5,6 +5,10 @@ import torch
 from torchvision.transforms import functional as tr
 
 
+imagenet_mean = (0.485, 0.456, 0.406)
+imagenet_std = (0.229, 0.224, 0.225)
+
+
 def listdir(dir, path=True):
     files = os.listdir(dir)
     files = [f for f in files if f != '.DS_Store']
@@ -34,27 +38,35 @@ def tensor_to_image(image):
 
 
 def imagenet_norm(image):
-    image = tr.normalize(image, mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))  # ImageNet normalization
+    image = tr.normalize(image, mean=imagenet_mean, std=imagenet_std)  # ImageNet normalization
     return image
 
 
 def imagenet_unnorm(image):
-    mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
-    std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32).view(3, 1, 1)
+    mean = torch.tensor(imagenet_mean, dtype=torch.float32).view(3, 1, 1)
+    std = torch.tensor(imagenet_std, dtype=torch.float32).view(3, 1, 1)
     image = image.cpu()
     image = image * std + mean  # ImageNet normalization
     return image
 
 
 def clamp_imagenet(image):
-    mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
-    std = torch.tensor((0.229, 0.224, 0.225), dtype=torch.float32).view(3, 1, 1)
+    mean = torch.tensor(imagenet_mean, dtype=torch.float32).view(3, 1, 1)
+    std = torch.tensor(imagenet_std, dtype=torch.float32).view(3, 1, 1)
     mean = mean.to(image.device)
     std = std.to(image.device)
     low = (0 - mean) / std
     high = (1 - mean) / std
     image = torch.max(torch.min(image, high), low)
     return image
+
+
+def sample_imagenet_noise():
+    mean = torch.tensor(imagenet_mean, dtype=torch.float32).view(3, 1, 1)
+    std = torch.tensor(imagenet_std, dtype=torch.float32).view(3, 1, 1)
+    noise = torch.distributions.Normal(mean.repeat(1, 375, 375), std.repeat(1, 375, 375)).sample()
+    noise = imagenet_norm(noise)
+    return noise
 
 
 def get_roi_mask(roi, encoder_file):
@@ -70,7 +82,7 @@ def get_roi_mask(roi, encoder_file):
 
 
 def get_run_name(study, feature_extractor, feature_name, rois):
-    run_name = '_'.join(['study=bold5000',
+    run_name = '_'.join(['study={}'.format(study),
                          'featextractor={}'.format(feature_extractor),
                          'featname={}'.format(feature_name),
                          'rois={}'.format(','.join(rois))])

@@ -6,7 +6,7 @@ from tqdm import tqdm
 import numpy as np
 import torch
 import utils
-from disruption import deepdream, roi_loss_func, loss_metrics
+from disruption import deepdream, deepvisualize, roi_loss_func, loss_metrics
 
 torch.manual_seed(27)
 resolution = 375
@@ -25,7 +25,8 @@ def disrupt_stimulus(stimulus, target, encoder, roi_mask, towards_target, random
     else:
         target[1 - roi_mask] = orig_voxels[1 - roi_mask]
 
-    disrupted = deepdream(stimulus, target, encoder, loss_func)
+    noise = (torch.rand_like(target) - 0.5) * 1e-5
+    disrupted = deepdream(stimulus, target+noise, encoder, loss_func)
     metrics = loss_metrics(stimulus, disrupted, target, encoder, roi_mask)
 
     return disrupted, metrics

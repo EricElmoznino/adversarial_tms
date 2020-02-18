@@ -5,7 +5,7 @@ import json
 from tqdm import tqdm
 import torch
 import utils
-from disruption import deepdream, roi_loss_func, loss_metrics
+from disruption import deepdream, deepvisualize, roi_loss_func, loss_metrics
 
 torch.manual_seed(27)
 resolution = 375
@@ -13,13 +13,9 @@ resolution = 375
 
 def generate_stimulus(target, encoder, towards_target):
     loss_func = roi_loss_func(roi_mask=None, towards_target=towards_target)
-
-    noise = torch.rand(3, resolution, resolution)
-    noise = utils.imagenet_norm(noise)
-
-    generated = deepdream(noise, target, encoder, loss_func, n_iter=20)
+    noise = utils.sample_imagenet_noise()
+    generated = deepvisualize(noise, target, encoder, loss_func)
     metrics = loss_metrics(noise, generated, target, encoder, roi_mask=None)
-
     return generated, metrics
 
 

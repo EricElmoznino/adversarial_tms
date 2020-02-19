@@ -1,15 +1,19 @@
-/* Global constants */
-let nTrials = 6;
-let nTraining = 2;
+/* Parameters */
+let nTrials = null;
 let stimPresentationTime = 30;
+let catchPresentationTime = 1000;
+let catchFreq = 4;
 let rootPath = "https://roi-disruption.s3.amazonaws.com/loc_disruption/";
+// let rootPath = "";
 
-/* Global variables */
+/* Globals */
 var trials = [];
 var curTrial = 0;
+var nTraining;
 var responseOptionValues;
 var trialStartTime;
 var training = true;
+var canProceed = true;
 
 /* Responses */
 var trialResponses = [];
@@ -36,17 +40,18 @@ function trialDone() {
     return;
   }
 
-  // Show button to continue to next trial
-  $('#nextTrialButton').show();
+  // Check if training is done
   if (curTrial == nTraining) {
-    $('#trainEndWarning').show();
-    training = false;
+    finishedTraining();
   }
+
+  // Wait for the signal to continue to the next trial
+  $('#nextTrialMessage').show();
   $(document).bind("keydown.nextTrial", function(event) {
-    if (event.which == 32) {
+    if (event.which == 32 && canProceed) {
       $(document).unbind("keydown.nextTrial");
-      $('#trainEndWarning').hide();
-      $('#nextTrialButton').hide();
+      $('#trialOptions').hide();
+      $('#nextTrialMessage').hide();
       $('#option1box').css("background-color", "white");
       $('#option2box').css("background-color", "white");
       if (curTrial == nTraining) {
@@ -62,18 +67,25 @@ function trialBegin(trialNum) {
   // Prepare the stimulus data
   loadTrialData(trialNum);
 
-  $('#trialOptions').hide();            // Hide the response options
-  $('#fixation').hide();              // Hide fixation cross
-  setTimeout(function() {       // Wait briefly before stimulus presentation
-    $('#trialImage').show();            // Show stimulus
-    setTimeout(function() {     // Wait briefly before hiding stimulus
-      $('#trialImage').hide();          // Hide stimulus
-      setTimeout(function() {   // Wait briefly before presenting response options        $('#fixation').show();          // Show fixation cross
-        $('#fixation').show();          // Show fixation cross
-        $('#trialOptions').show();      // Present response options
-      }, 100);
-    }, stimPresentationTime);
+  // Pick presentation time based on if this is a catch trial or not
+  var presentationTime = stimPresentationTime;
+  if (trials[trialNum]["type"] == "catch") {
+    presentationTime = catchPresentationTime;
+  }
 
+  // Present stimulus
+  $('#fixation').show();                      // Show fixation cross
+  setTimeout(function() {             // Wait briefly before stimulus presentation
+    $('#fixation').hide();
+    $('#trialImage').show();                  // Show stimulus
+    setTimeout(function() {           // Wait briefly before hiding stimulus
+      $('#trialImage').hide();                // Hide stimulus
+      setTimeout(function() {         // Wait briefly before presenting response options
+        $('#trialOptions').show();            // Present response options
+      }, 100);
+    }, presentationTime);
+
+    // Wait for response
     $(document).bind("keydown.response", function(event) {
       if (event.which == 68) {
         $(document).unbind("keydown.response");
@@ -92,7 +104,7 @@ function trialBegin(trialNum) {
         trialDone();
       }
     });
-  }, 500);
+  }, 1000);
 }
 
 function loadTrialData(trialNum) {
@@ -118,6 +130,16 @@ function loadTrialData(trialNum) {
   }
 }
 
+function finishedTraining() {
+  canProceed = false;
+  $('#trainEndWarning').show();
+  training = false;
+  $('#proceedExperiment').click(function () {
+    canProceed = true;
+    $('#trainEndWarning').hide();
+  });
+}
+
 function startExperiment() {
   $('#startExperiment').hide();
   $('#instructionsContainer').hide();
@@ -138,17 +160,50 @@ function exportData() {
 /* Setup/preloading code */
 function getTrials(callback) {
   $.getJSON(rootPath + "assets/stimuli.json", function(data) {
-    let stimuli = shuffle(data["stimuli"]);
-    let foilCats = data["foilCategories"];
+    var catchStimuli = data["catchStimuli"];
+    var trainStimuli = data["trainStimuli"];
+    var stimuli = shuffle(data["stimuli"]);
+    var foilCats = data["foilCategories"];
+
+    nTraining = trainStimuli.length;
+    if (nTrials == null) {
+      nTrials = stimuli.length;
+    }
+
+    for (var iStim = 0; iStim < catchStimuli.length; iStim++) {
+      var stimulus = catchStimuli[iStim];
+      stimulus["type"] = "catch";
+      stimulus["foilCat"] = sample(foilCats);
+    }
+    shuffle(catchStimuli);
+
+    for (var iStim = 0; iStim < nTraining; iStim++) {
+      var stimulus = trainStimuli[iStim];
+      stimulus["type"] = "training";
+      stimulus["foilCat"] = sample(foilCats);
+    }
+    shuffle(trainStimuli);
 
     let types = ["disrupted", "random", "original"];
     for (var iStim = 0, iType = 0; iStim < nTrials; iStim++, iType++) {
       var stimulus = stimuli[iStim];
       stimulus["type"] = types[iType % types.length];
       stimulus["foilCat"] = sample(foilCats);
-      trials.push(stimulus);
     }
-    trials = shuffle(trials);
+    stimuli = shuffle(stimuli);
+
+    var trialsWithCatches = [];
+    for (var iStim = 0, iCatch = 0; iStim < stimuli.length; iStim++) {
+      trialsWithCatches.push(stimuli[iStim]);
+      if (iStim % catchFreq == catchFreq - 1) {
+        trialsWithCatches.push(catchStimuli[iCatch]);
+        iCatch++;
+      }
+    }
+
+    trials = trainStimuli.concat(trialsWithCatches);
+    nTrials = trials.length;
+
     callback();
   });
 }

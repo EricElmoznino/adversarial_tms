@@ -2,9 +2,9 @@
 let nTrials = null;
 let stimPresentationTime = 30;
 let catchPresentationTime = 1000;
-let catchFreq = 4;
-let rootPath = "https://roi-disruption.s3.amazonaws.com/loc_disruption/";
-// let rootPath = "";
+let catchFreq = 5;
+// let rootPath = "https://roi-disruption.s3.amazonaws.com/loc_disruption/";
+let rootPath = "";
 
 /* Globals */
 var trials = [];

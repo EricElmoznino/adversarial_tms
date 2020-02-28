@@ -1,0 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="script.js"></script>
+
+<div class="container" id="instructionsContainer">
+    <div id="instructions">
+        <h2>Welcome to our study!</h2>
+        <p>This is a psychology experiment in which you will be <b>presented patterned images</b> that you will need to <b>classify</b> by choosing between two options. You will be able to select your option by using the <b>'D'</b> and <b>'K'</b> keys on your keyboard. After you make your selection, you will be able to press the <b>'Space'</b> key to continue to the next image. If the images do not look like anything obvious to you, go with your gut instinct. The task will take about <b>1 minute</b> to complete.</p>
+        <h2>Consent</h2>
+        <p>This task is completely anonymous. By completing the task, you are consenting to be in this research study. Your participation is voluntary and you can stop at any time. If you are ready, check the box below to indicate your consent.</p>
+        <p><input type="checkbox" name="consent_check" value="agree" id="consent"> I agree to participate. </p>
+        <div id="startExperimentButton" class="button">
+            <a href="#" class="buttonText"  id="startExperiment">Ready to begin!</a>
+        </div>
+    </div>
+</div>
+
+<div id="trial">
+    <img width="375" id="trialImage" src="">
+    <div id="trialOptions">
+        <h3>What does this look like more?</h3>
+        <div class="option" id="option1box"><strong id="option1"></strong><br />(Press 'D')</div>
+        <div class="option" id="option2box"><strong id="option2"></strong><br />(Press 'K')</div>
+    </div>
+    <div id="nextTrialMessage">Press 'Space' to continue</div>
+</div>
+
+<input type="hidden" id="response" name="response" value="">
+<input type="hidden" id="trueCat" name="trueCat" value="">
+<input type="hidden" id="foilCat" name="foilCat" value="">
+<input type="hidden" id="displayedImage" name="displayedImage" value="">
+<input type="hidden" id="isRandom" name="isRandom" value="">
+<input type="hidden" id="reactionTime" name="reactionTime" value="">
+
+<!-- do not put this on Turk -->
+<input type="submit" id="submitButton">

@@ -1,0 +1,409 @@
+{
+  "stimuli": [
+    {
+      "image": "tray001.png",
+      "trueCat": "tray",
+      "foilCat": "cloud"
+    },
+    {
+      "image": "napkin001.png",
+      "trueCat": "napkin",
+      "foilCat": "mountain"
+    },
+    {
+      "image": "plate001.png",
+      "trueCat": "plate",
+      "foilCat": "tree"
+    },
+    {
+      "image": "kettle001.png",
+      "trueCat": "kettle",
+      "foilCat": "beacon"
+    },
+    {
+      "image": "laptop001.png",
+      "trueCat": "laptop",
+      "foilCat": "armchair"
+    },
+    {
+      "image": "grass001.png",
+      "trueCat": "grass",
+      "foilCat": "chimney"
+    },
+    {
+      "image": "soap001.png",
+      "trueCat": "soap",
+      "foilCat": "towel"
+    },
+    {
+      "image": "canister001.png",
+      "trueCat": "canister",
+      "foilCat": "pillow"
+    },
+    {
+      "image": "blanket001.png",
+      "trueCat": "blanket",
+      "foilCat": "candlestick"
+    },
+    {
+      "image": "beacon001.png",
+      "trueCat": "beacon",
+      "foilCat": "sand"
+    },
+    {
+      "image": "chimney001.png",
+      "trueCat": "chimney",
+      "foilCat": "table"
+    },
+    {
+      "image": "figurine001.png",
+      "trueCat": "figurine",
+      "foilCat": "jar"
+    },
+    {
+      "image": "toilet001.png",
+      "trueCat": "toilet",
+      "foilCat": "laptop"
+    },
+    {
+      "image": "pen001.png",
+      "trueCat": "pen",
+      "foilCat": "mug"
+    },
+    {
+      "image": "dishwasher001.png",
+      "trueCat": "dishwasher",
+      "foilCat": "manhole"
+    },
+    {
+      "image": "sea001.png",
+      "trueCat": "sea",
+      "foilCat": "railing"
+    },
+    {
+      "image": "bed001.png",
+      "trueCat": "bed",
+      "foilCat": "sink"
+    },
+    {
+      "image": "vase001.png",
+      "trueCat": "vase",
+      "foilCat": "microwave"
+    },
+    {
+      "image": "bench001.png",
+      "trueCat": "bench",
+      "foilCat": "notebook"
+    },
+    {
+      "image": "hood001.png",
+      "trueCat": "hood",
+      "foilCat": "road"
+    },
+    {
+      "image": "stool001.png",
+      "trueCat": "stool",
+      "foilCat": "blanket"
+    },
+    {
+      "image": "swivel_chair001.png",
+      "trueCat": "swivel_chair",
+      "foilCat": "van"
+    },
+    {
+      "image": "plant001.png",
+      "trueCat": "plant",
+      "foilCat": "sofa"
+    },
+    {
+      "image": "lamp001.png",
+      "trueCat": "lamp",
+      "foilCat": "sidewalk"
+    },
+    {
+      "image": "fireplug001.png",
+      "trueCat": "fireplug",
+      "foilCat": "switch"
+    },
+    {
+      "image": "manhole001.png",
+      "trueCat": "manhole",
+      "foilCat": "lamp"
+    },
+    {
+      "image": "toaster001.png",
+      "trueCat": "toaster",
+      "foilCat": "rug"
+    },
+    {
+      "image": "road001.png",
+      "trueCat": "road",
+      "foilCat": "soap"
+    },
+    {
+      "image": "telephone001.png",
+      "trueCat": "telephone",
+      "foilCat": "swivel_chair"
+    },
+    {
+      "image": "bus001.png",
+      "trueCat": "bus",
+      "foilCat": "refrigerator"
+    },
+    {
+      "image": "sand001.png",
+      "trueCat": "sand",
+      "foilCat": "pitcher"
+    },
+    {
+      "image": "jar001.png",
+      "trueCat": "jar",
+      "foilCat": "oven"
+    },
+    {
+      "image": "sink001.png",
+      "trueCat": "sink",
+      "foilCat": "ottoman"
+    },
+    {
+      "image": "oven001.png",
+      "trueCat": "oven",
+      "foilCat": "figurine"
+    },
+    {
+      "image": "bottle001.png",
+      "trueCat": "bottle",
+      "foilCat": "building"
+    },
+    {
+      "image": "sofa001.png",
+      "trueCat": "sofa",
+      "foilCat": "computer"
+    },
+    {
+      "image": "pitcher001.png",
+      "trueCat": "pitcher",
+      "foilCat": "plant"
+    },
+    {
+      "image": "pillow001.png",
+      "trueCat": "pillow",
+      "foilCat": "napkin"
+    },
+    {
+      "image": "fan001.png",
+      "trueCat": "fan",
+      "foilCat": "desk"
+    },
+    {
+      "image": "cloud001.png",
+      "trueCat": "cloud",
+      "foilCat": "car"
+    },
+    {
+      "image": "van001.png",
+      "trueCat": "van",
+      "foilCat": "house"
+    },
+    {
+      "image": "cliff001.png",
+      "trueCat": "cliff",
+      "foilCat": "mouse"
+    },
+    {
+      "image": "printer001.png",
+      "trueCat": "printer",
+      "foilCat": "bed"
+    },
+    {
+      "image": "computer001.png",
+      "trueCat": "computer",
+      "foilCat": "hood"
+    },
+    {
+      "image": "candlestick001.png",
+      "trueCat": "candlestick",
+      "foilCat": "streetlight"
+    },
+    {
+      "image": "knife001.png",
+      "trueCat": "knife",
+      "foilCat": "rock"
+    },
+    {
+      "image": "bowl001.png",
+      "trueCat": "bowl",
+      "foilCat": "canister"
+    },
+    {
+      "image": "bookcase001.png",
+      "trueCat": "bookcase",
+      "foilCat": "crosswalk"
+    },
+    {
+      "image": "ottoman001.png",
+      "trueCat": "ottoman",
+      "foilCat": "airplane"
+    },
+    {
+      "image": "armchair001.png",
+      "trueCat": "armchair",
+      "foilCat": "bicycle"
+    },
+    {
+      "image": "refrigerator001.png",
+      "trueCat": "refrigerator",
+      "foilCat": "fireplug"
+    },
+    {
+      "image": "building001.png",
+      "trueCat": "building",
+      "foilCat": "bench"
+    },
+    {
+      "image": "rock001.png",
+      "trueCat": "rock",
+      "foilCat": "plate"
+    },
+    {
+      "image": "book001.png",
+      "trueCat": "book",
+      "foilCat": "cup"
+    },
+    {
+      "image": "rug001.png",
+      "trueCat": "rug",
+      "foilCat": "boat"
+    },
+    {
+      "image": "microwave001.png",
+      "trueCat": "microwave",
+      "foilCat": "dishwasher"
+    },
+    {
+      "image": "bathtub001.png",
+      "trueCat": "bathtub",
+      "foilCat": "tray"
+    },
+    {
+      "image": "mouse001.png",
+      "trueCat": "mouse",
+      "foilCat": "stool"
+    },
+    {
+      "image": "switch001.png",
+      "trueCat": "switch",
+      "foilCat": "printer"
+    },
+    {
+      "image": "house001.png",
+      "trueCat": "house",
+      "foilCat": "truck"
+    },
+    {
+      "image": "sidewalk001.png",
+      "trueCat": "sidewalk",
+      "foilCat": "bathtub"
+    },
+    {
+      "image": "bicycle001.png",
+      "trueCat": "bicycle",
+      "foilCat": "kettle"
+    },
+    {
+      "image": "mug001.png",
+      "trueCat": "mug",
+      "foilCat": "book"
+    },
+    {
+      "image": "railing001.png",
+      "trueCat": "railing",
+      "foilCat": "toilet"
+    },
+    {
+      "image": "tree001.png",
+      "trueCat": "tree",
+      "foilCat": "cliff"
+    },
+    {
+      "image": "desk001.png",
+      "trueCat": "desk",
+      "foilCat": "toaster"
+    },
+    {
+      "image": "car001.png",
+      "trueCat": "car",
+      "foilCat": "bottle"
+    },
+    {
+      "image": "cup001.png",
+      "trueCat": "cup",
+      "foilCat": "sea"
+    },
+    {
+      "image": "streetlight001.png",
+      "trueCat": "streetlight",
+      "foilCat": "fan"
+    },
+    {
+      "image": "boat001.png",
+      "trueCat": "boat",
+      "foilCat": "bookcase"
+    },
+    {
+      "image": "truck001.png",
+      "trueCat": "truck",
+      "foilCat": "vase"
+    },
+    {
+      "image": "keyboard001.png",
+      "trueCat": "keyboard",
+      "foilCat": "cabinet"
+    },
+    {
+      "image": "airplane001.png",
+      "trueCat": "airplane",
+      "foilCat": "bus"
+    },
+    {
+      "image": "table001.png",
+      "trueCat": "table",
+      "foilCat": "pen"
+    },
+    {
+      "image": "mountain001.png",
+      "trueCat": "mountain",
+      "foilCat": "grass"
+    },
+    {
+      "image": "monitor001.png",
+      "trueCat": "monitor",
+      "foilCat": "telephone"
+    },
+    {
+      "image": "towel001.png",
+      "trueCat": "towel",
+      "foilCat": "minibike"
+    },
+    {
+      "image": "minibike001.png",
+      "trueCat": "minibike",
+      "foilCat": "monitor"
+    },
+    {
+      "image": "crosswalk001.png",
+      "trueCat": "crosswalk",
+      "foilCat": "knife"
+    },
+    {
+      "image": "notebook001.png",
+      "trueCat": "notebook",
+      "foilCat": "keyboard"
+    },
+    {
+      "image": "cabinet001.png",
+      "trueCat": "cabinet",
+      "foilCat": "bowl"
+    }
+  ]
+}

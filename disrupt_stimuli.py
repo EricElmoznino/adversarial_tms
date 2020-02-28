@@ -43,7 +43,7 @@ if __name__ == '__main__':
     parser.add_argument('--towards_target', action='store_true',
                         help='whether to disrupt voxels away from target or towards it')
     parser.add_argument('--random', action='store_true',
-                        help='whether to disrupt voxels away from target or towards it')
+                        help='whether to use an encoder with random weights')
     args = parser.parse_args()
 
     shutil.rmtree(args.save_folder, ignore_errors=True)

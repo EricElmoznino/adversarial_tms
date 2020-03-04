@@ -3,8 +3,8 @@ let nTrials = null;
 let stimPresentationTime = 30;
 let catchPresentationTime = 1000;
 let catchFreq = 5;
-// let rootPath = "https://roi-disruption.s3.amazonaws.com/loc_disruption/";
-let rootPath = "";
+let rootPath = "https://roi-disruption.s3.amazonaws.com/loc_disruption/";
+// let rootPath = "";
 
 /* Globals */
 var trials = [];
@@ -13,6 +13,7 @@ var curResponse = null;
 var nTraining;
 var responseOptionValues;
 var trialStartTime;
+var experimentStartTime;
 var training = true;
 var canProceed = true;
 var stimPresenting = false;
@@ -120,11 +121,10 @@ function doneExperiment() {
 }
 
 function startExperiment() {
+    experimentStartTime = new Date();
     $('#startExperiment').hide();
     $('#instructionsContainer').hide();
     $('#trial').show();
-    trialBegin(0);
-    trialStartTime = new Date();
 
 
     // Click events
@@ -132,7 +132,7 @@ function startExperiment() {
     // User has selected a response (pressed a key)
     $(document).bind("keydown.responded", function (event) {
         // Check if the key corresponds to a valid response
-        if ((event.which != 68 && event.which != 75) || stimPresenting) {
+        if ((event.which != 70 && event.which != 74) || stimPresenting) {
             return;
         }
 
@@ -147,7 +147,7 @@ function startExperiment() {
         }
 
         // Register which response was made
-        if (event.which == 68) {
+        if (event.which == 70) {
             curResponse = responseOptionValues[0];
             $('#option1box').css("background-color", "lightgrey");
             $('#option2box').css("background-color", "white");
@@ -173,6 +173,8 @@ function startExperiment() {
             trialDone();
         }
     });
+
+    trialBegin();
 }
 
 function exportData() {
@@ -182,6 +184,9 @@ function exportData() {
     $('#foilCats').val(foilCats.join());
     $('#responses').val(responses.join());
     $('#reactionTimes').val(reactionTimes.join());
+    var curTime = new Date();
+    var experimentTime = curTime - experimentStartTime;
+    $('#experimentTime').val(experimentTime);
 }
 
 /* Setup/preloading code */

@@ -5,7 +5,7 @@
 <div class="container" id="instructionsContainer">
     <div id="instructions">
         <h2>Welcome to our study!</h2>
-        <p>This is a psychology experiment in which you will be <b>presented images</b> for a very <b>short interval</b>, after which you will need to <b>classify</b> what you saw by choosing between two options. You will be able to select your option by using the <b>'D'</b> and <b>'K'</b> keys on your keyboard. After you make your selection, you will be able to press the <b>'Space'</b> key to continue to the next image. Some images will be presented for longer intervals than others. The task will take about <b>1 minute</b> to complete.</p>
+        <p>This is a psychology experiment in which you will be <b>presented images</b> for a very <b>short interval</b>, after which you will need to <b>classify</b> what you saw by choosing between two options. You will be able to select your option by using the <b>'F'</b> and <b>'J'</b> keys on your keyboard. After you make your selection, you will be able to press the <b>'Space'</b> key to continue to the next image. Some images will be presented for longer intervals than others. The task will take about <b>4 minutes</b> to complete.</p>
         <p>Before the task begins, there will be a brief <b>training session</b>. This training session will be identical to the actual experiment in every way, except that your responses will not be recorded. The purpose of the training session is to give you a better understanding of the task.</p>
         <h2>Consent</h2>
         <p>This task is completely anonymous. By completing the task, you are consenting to be in this research study. Your participation is voluntary and you can stop at any time. If you are ready, check the box below to indicate your consent.</p>
@@ -22,8 +22,8 @@
     <img width="375" id="trialImage" src="">
     <div id="trialOptions">
         <h3>What did you see?</h3>
-        <div class="option" id="option1box"><strong id="option1"></strong><br />(Press 'D')</div>
-        <div class="option" id="option2box"><strong id="option2"></strong><br />(Press 'K')</div>
+        <div class="option" id="option1box"><strong id="option1"></strong><br />(Press 'F')</div>
+        <div class="option" id="option2box"><strong id="option2"></strong><br />(Press 'J')</div>
     </div>
     <div id="nextTrialMessage">
         <p>Press 'Space' to continue</p>
@@ -41,6 +41,7 @@
 <input type="hidden" id="trueCats" name="trueCats" value="">
 <input type="hidden" id="foilCats" name="foilCats" value="">
 <input type="hidden" id="reactionTimes" name="reactionTimes" value="">
+<input type="hidden" id="experimentTime" name="experimentTime" value="">
 
 <!-- do not put this on Turk -->
 <input type="submit" id="submitButton">

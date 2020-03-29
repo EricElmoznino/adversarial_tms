@@ -18,7 +18,7 @@ def get_loss_func_for_class(c):
 if __name__ == '__main__':
     parser = ArgumentParser(description='Optimize an image to maximize a class probability using a GAN')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save generated images')
-    parser.add_argument('--classes', nargs='+', default=[624], type=int, help='classes to generate')
+    parser.add_argument('--classes', nargs='+', default=[629], type=int, help='classes to generate')
     args = parser.parse_args()
 
     shutil.rmtree(args.save_folder, ignore_errors=True)
@@ -27,6 +27,9 @@ if __name__ == '__main__':
     encoder = alexnet(pretrained=True)
     encoder.eval()
     generator = DeePSiM()
+    if torch.cuda.is_available():
+        encoder.cuda()
+        generator.cuda()
 
     for c in tqdm(args.classes):
         generated_image, _, best_act = optimize(generator, encoder, torch.zeros(1), get_loss_func_for_class(c))

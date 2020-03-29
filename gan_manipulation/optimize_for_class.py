@@ -3,6 +3,7 @@ import os
 import shutil
 from tqdm import tqdm
 import torch
+from pytorch_pretrained_biggan import BigGAN
 from gan_manipulation import DeePSiM
 from gan_manipulation import optimize
 from torchvision.models import alexnet
@@ -19,6 +20,8 @@ if __name__ == '__main__':
     parser = ArgumentParser(description='Optimize an image to maximize a class probability using a GAN')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save generated images')
     parser.add_argument('--classes', nargs='+', default=[629], type=int, help='classes to generate')
+    parser.add_argument('--model', default='deepsim', type='str', choices=['deepsim', 'biggan'],
+                        help='which generator model to use for optimizing images')
     args = parser.parse_args()
 
     shutil.rmtree(args.save_folder, ignore_errors=True)
@@ -26,7 +29,10 @@ if __name__ == '__main__':
 
     encoder = alexnet(pretrained=True)
     encoder.eval()
-    generator = DeePSiM()
+    if args.model == 'deepsim':
+        generator = DeePSiM()
+    elif args.model == 'biggan':
+        generator = BigGAN.from_pretrained('biggan-deep-256')
     if torch.cuda.is_available():
         encoder.cuda()
         generator.cuda()

@@ -1,16 +1,15 @@
 import torch
+from pytorch_pretrained_biggan.utils import truncated_noise_sample
 import utils
 
 
 def optimize(generator, encoder, target, loss_func, initial_latent=None,
              n_iter=200, alpha=2.0, decay=5e-3):
     # Initialization
-    min_latent = torch.zeros(4096)
-    max_latent = torch.load('gan_manipulation/pretrained_models/latent_upper_bounds.pth')
     if initial_latent is None:
-        latent_mean = torch.load('gan_manipulation/pretrained_models/latent_mean.pth')
-        latent_std = torch.load('gan_manipulation/pretrained_models/latent_std.pth')
-        initial_latent = torch.distributions.Normal(latent_mean, latent_std).sample()
+        initial_latent, min_latent, max_latent = latent_params_for_model(generator)
+    else:
+        _, min_latent, max_latent = latent_params_for_model(generator)
     latent = initial_latent.unsqueeze(0)
     target = target.unsqueeze(0)
     if torch.cuda.is_available():
@@ -30,6 +29,8 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
         # Forward pass through generator and encoder
         latent.requires_grad = True
         generated_image = generator(latent)
+        if type(generator).__name__ == 'BigGAN':
+            generated_image = (generated_image + 1) / 2
         encoding = encoder(utils.imagenet_norm(generated_image))
 
         # Backpropagate loss
@@ -64,3 +65,19 @@ def update(x, step_size):
     x = x - step_size_scaled * x.grad
     x = x.detach()
     return x
+
+
+def latent_params_for_model(model):
+    if type(model).__name__ == 'DeePSiM':
+        min_latent = torch.zeros(4096)
+        max_latent = torch.load('gan_manipulation/pretrained_models/latent_upper_bounds.pth')
+        latent_mean = torch.load('gan_manipulation/pretrained_models/latent_mean.pth')
+        latent_std = torch.load('gan_manipulation/pretrained_models/latent_std.pth')
+        initial_latent = torch.distributions.Normal(latent_mean, latent_std).sample()
+    elif type(model).__name__ == 'BigGAN':
+        min_latent = torch.cat([torch.ones(128) * -2, torch.zeros(1000)])
+        max_latent = torch.cat([torch.ones(128) * 2, torch.ones(1000)])
+        initial_latent = torch.cat([truncated_noise_sample(truncation=1), torch.zeros(1000)])
+    else:
+        raise NotImplementedError('No implementation for model: {}'.format(type(model).__name__))
+    return initial_latent, min_latent, max_latent

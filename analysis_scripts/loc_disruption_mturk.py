@@ -51,4 +51,7 @@ def plot_results_by_image(data, y='Response'):
 
 data = pd.read_csv('/home/eric/Documents/experiments/adversarial_tms/mturk_results/loc_disruption_results.csv')
 data = transform_data(data)
-plot_results_by_image(data, 'Response')
+# plot_results(data, 'Response')
+# plot_results(data, 'Reaction Time')
+# plot_results_by_image(data, 'Response')
+# plot_results_by_image(data, 'Reaction Time')

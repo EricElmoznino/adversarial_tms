@@ -7,7 +7,7 @@ from models import Encoder, AlexNet, VGG16, RegressionModel
 from object2vec.Subject import Subject
 from object2vec.regression import cv_regression
 
-resolution = 375
+resolution = 256
 
 
 def mean_condition_features(stimuli_folder, model):
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     parser.add_argument('--subject_number', default=1, type=int, help='subject number to train encoder for',
                         choices=[1, 2, 3, 4])
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
-    parser.add_argument('--feature_name', default='pool', type=str, help='feature extraction layer')
+    parser.add_argument('--feature_name', default='conv_3', type=str, help='feature extraction layer')
     parser.add_argument('--rois', nargs='+', default=['LOC', 'PPA'], type=str, help='ROIs to fit')
     args = parser.parse_args()
 

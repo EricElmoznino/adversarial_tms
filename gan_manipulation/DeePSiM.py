@@ -28,6 +28,10 @@ class DeePSiM(nn.Module):
         self.load_state_dict(torch.load('gan_manipulation/pretrained_models/deepsim.pth',
                                         map_location=lambda storage, loc: storage))
 
+        self.imagenet_mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
+        # if torch.cuda.is_available():
+        #     self.imagenet_mean = self.imagenet_mean.cuda()
+
     def forward(self, x):
         lrelu = self.lrelu
         x = lrelu(self.fc7(x))
@@ -43,13 +47,13 @@ class DeePSiM(nn.Module):
         x = lrelu(self.tconv2(x))
         x = lrelu(self.tconv1(x))
         x = self.tconv0(x)
-        x = deprocess(x)
+        x = self.deprocess(x)
         return x
 
 
-def deprocess(x):
-    x = x.clone()
-    x = x[:, [2, 1, 0], :, :]                                               # BGR to RGB
-    x /= 255                                                                # Rescale
-    x += torch.tensor(imagenet_mean, dtype=torch.float32).view(3, 1, 1)     # Undo ImageNet normalization
-    return x
+    def deprocess(self, x):
+        x = x.clone()
+        x = x[:, [2, 1, 0], :, :]                                               # BGR to RGB
+        x /= 255                                                                # Rescale
+        x += self.imagenet_mean                                                 # Undo ImageNet normalization
+        return x

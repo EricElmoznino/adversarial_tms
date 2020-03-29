@@ -77,7 +77,8 @@ def latent_params_for_model(model):
     elif type(model).__name__ == 'BigGAN':
         min_latent = torch.cat([torch.ones(128) * -2, torch.zeros(1000)])
         max_latent = torch.cat([torch.ones(128) * 2, torch.ones(1000)])
-        initial_latent = torch.cat([truncated_noise_sample(truncation=1), torch.zeros(1000)])
+        noise = torch.from_numpy(truncated_noise_sample(truncation=1))
+        initial_latent = torch.cat([noise, torch.zeros(1000)])
     else:
         raise NotImplementedError('No implementation for model: {}'.format(type(model).__name__))
     return initial_latent, min_latent, max_latent

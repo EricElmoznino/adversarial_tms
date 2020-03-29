@@ -16,6 +16,8 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
     if torch.cuda.is_available():
         latent = latent.cuda()
         target = target.cuda()
+        min_latent = min_latent.cuda()
+        max_latent = max_latent.cuda()
 
     # Alpha decay
     alpha_decay = (alpha - 1e-3) / n_iter

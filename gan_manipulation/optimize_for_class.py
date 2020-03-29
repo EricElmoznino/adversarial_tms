@@ -20,7 +20,7 @@ if __name__ == '__main__':
     parser = ArgumentParser(description='Optimize an image to maximize a class probability using a GAN')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save generated images')
     parser.add_argument('--classes', nargs='+', default=[629], type=int, help='classes to generate')
-    parser.add_argument('--model', default='deepsim', type='str', choices=['deepsim', 'biggan'],
+    parser.add_argument('--model', default='deepsim', type=str, choices=['deepsim', 'biggan'],
                         help='which generator model to use for optimizing images')
     args = parser.parse_args()
 

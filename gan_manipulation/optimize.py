@@ -28,9 +28,11 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
     for i in range(n_iter):
         # Forward pass through generator and encoder
         latent.requires_grad = True
-        generated_image = generator(latent)
         if type(generator).__name__ == 'BigGAN':
+            generated_image = generator(z=latent[:, :128], class_label=latent[:, 128:], truncation=1)
             generated_image = (generated_image + 1) / 2
+        else:
+            generated_image = generator(latent)
         encoding = encoder(utils.imagenet_norm(generated_image))
 
         # Backpropagate loss

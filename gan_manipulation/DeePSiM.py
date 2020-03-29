@@ -29,8 +29,6 @@ class DeePSiM(nn.Module):
                                         map_location=lambda storage, loc: storage))
 
         self.imagenet_mean = torch.tensor((0.485, 0.456, 0.406), dtype=torch.float32).view(3, 1, 1)
-        # if torch.cuda.is_available():
-        #     self.imagenet_mean = self.imagenet_mean.cuda()
 
     def forward(self, x):
         lrelu = self.lrelu
@@ -50,10 +48,17 @@ class DeePSiM(nn.Module):
         x = self.deprocess(x)
         return x
 
-
     def deprocess(self, x):
         x = x.clone()
         x = x[:, [2, 1, 0], :, :]                                               # BGR to RGB
         x /= 255                                                                # Rescale
         x += self.imagenet_mean                                                 # Undo ImageNet normalization
         return x
+
+    def cuda(self):
+        super().cuda()
+        self.imagenet_mean = self.imagenet_mean.cuda()
+
+    def cpu(self):
+        super().cpu()
+        self.imagenet_mean = self.imagenet_mean.cpu()

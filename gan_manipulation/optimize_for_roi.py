@@ -16,7 +16,7 @@ def generate_samples(save_path, generator, encoder, target, loss_func, n_samples
     for i in range(n_samples):
         generated_image, _, loss = optimize(generator, encoder, target, loss_func)
         generated_image = to_pil_image(generated_image)
-        generated_image.save('{}_{}.png}'.format(save_path, i))
+        generated_image.save('{}_{}.png'.format(save_path, i))
         mean_loss += loss / n_samples
     with open('{}_metrics.json'.format(save_path), 'w') as f:
         f.write(json.dumps({'mean_final_loss': mean_loss}, indent=2))

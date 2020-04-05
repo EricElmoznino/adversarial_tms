@@ -22,9 +22,9 @@ def generate_stimulus(target, encoder, towards_target):
 if __name__ == '__main__':
     parser = ArgumentParser(description='Stimulus disruptions')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save disrupted images')
+    parser.add_argument('--encoder_file', required=True, type=str, help='name of the encoder file')
     parser.add_argument('--targets_folder', default=None, type=str,
                         help='folder containing voxel targets (if not provided, activation will be maximized)')
-    parser.add_argument('--encoder_file', required=True, type=str, help='path to the encoder file')
     args = parser.parse_args()
 
     shutil.rmtree(args.save_folder, ignore_errors=True)

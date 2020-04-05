@@ -3,11 +3,11 @@ import os
 import shutil
 from tqdm import tqdm
 import torch
+from torchvision.transforms.functional import to_pil_image
 from pytorch_pretrained_biggan import BigGAN
 from gan_manipulation import DeePSiM
 from gan_manipulation import optimize
 from torchvision.models import alexnet
-from torchvision.transforms.functional import to_pil_image
 
 
 def get_loss_func_for_class(c):

@@ -38,10 +38,13 @@ def tensor_to_image(image):
 
 
 def imagenet_norm(image):
-    if len(image.shape) < 4:
+    dims = len(image.shape)
+    if dims < 4:
         image = [image]
     image = [tr.normalize(img, mean=imagenet_mean, std=imagenet_std) for img in image]
     image = torch.stack(image, dim=0)
+    if dims < 4:
+        image = image.squeeze(0)
     return image
 
 

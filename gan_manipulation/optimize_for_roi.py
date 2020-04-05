@@ -11,12 +11,24 @@ from gan_manipulation import optimize
 from disruption import roi_loss_func
 
 
+def generate_samples(save_path, generator, encoder, target, loss_func, n_samples):
+    mean_loss = 0
+    for i in range(n_samples):
+        generated_image, _, loss = optimize(generator, encoder, target, loss_func)
+        generated_image = to_pil_image(generated_image)
+        generated_image.save('{}_{}.png}'.format(save_path, i))
+        mean_loss += loss / n_samples
+    with open('{}_metrics.json'.format(save_path), 'w') as f:
+        f.write(json.dumps({'mean_final_loss': mean_loss}, indent=2))
+
+
 if __name__ == '__main__':
     parser = ArgumentParser(description='Optimize an image to maximize a class probability using a GAN')
     parser.add_argument('--save_folder', required=True, type=str, help='folder to save generated images')
     parser.add_argument('--encoder_file', required=True, type=str, help='name of the encoder file')
     parser.add_argument('--targets_folder', default=None, type=str,
                         help='folder containing voxel targets (if not provided, activation will be maximized)')
+    parser.add_argument('--n_samples', default=1, type=int, help='number of samples to generate per target')
     parser.add_argument('--model', default='deepsim', type=str, choices=['deepsim', 'biggan'],
                         help='which generator model to use for optimizing images')
     args = parser.parse_args()
@@ -42,20 +54,11 @@ if __name__ == '__main__':
         targets = [t for t in targets if '.target.pth' in t]
         for target_name in tqdm(targets):
             target = torch.load(os.path.join(args.targets_folder, target_name))
-            generated_image, _, loss = optimize(generator, encoder, target, loss_func)
-            generated_image = to_pil_image(generated_image)
-            generated_image.save(os.path.join(args.save_folder, target_name.split('.')[0] + '.png'))
-            metrics = {'final_mse': loss}
-            with open(os.path.join(args.save_folder, target_name.split('.')[0] + '_metrics.json'), 'w') as f:
-                f.write(json.dumps(metrics, indent=2))
+            save_path = os.path.join(args.save_folder, target_name.split('.')[0])
+            generate_samples(save_path, generator, encoder, target, loss_func, args.n_samples)
     else:
         print('Generating untargeted stimuli')
         loss_func = roi_loss_func(roi_mask=None, towards_target=False)
-        for i in tqdm(range(20)):
-            target = torch.zeros(encoder.regressor.linear.out_features)
-            generated_image, _, loss = optimize(generator, encoder, target, loss_func)
-            generated_image = to_pil_image(generated_image)
-            generated_image.save(os.path.join(args.save_folder, '{:05d}.png'.format(i)))
-            metrics = {'final_mean_activation': -loss}
-            with open(os.path.join(args.save_folder, '{:05d}_metrics.json'.format(i)), 'w') as f:
-                f.write(json.dumps(metrics, indent=2))
+        target = torch.zeros(encoder.regressor.linear.out_features)
+        save_path = os.path.join(args.save_folder, 'sample')
+        generate_samples(save_path, generator, encoder, target, loss_func, args.n_samples)

@@ -8,12 +8,12 @@ import utils
 from disruption import deepdream, deepvisualize, roi_loss_func, loss_metrics
 
 torch.manual_seed(27)
-resolution = 375
+resolution = 256
 
 
 def generate_stimulus(target, encoder, towards_target):
     loss_func = roi_loss_func(roi_mask=None, towards_target=towards_target)
-    noise = utils.sample_imagenet_noise()
+    noise = utils.sample_imagenet_noise(resolution=256)
     generated = deepvisualize(noise, target, encoder, loss_func)
     metrics = loss_metrics(noise, generated, target, encoder, roi_mask=None)
     return generated, metrics

@@ -67,10 +67,11 @@ def clamp_imagenet(image):
     return image
 
 
-def sample_imagenet_noise():
+def sample_imagenet_noise(resolution):
     mean = torch.tensor(imagenet_mean, dtype=torch.float32).view(3, 1, 1)
     std = torch.tensor(imagenet_std, dtype=torch.float32).view(3, 1, 1)
-    noise = torch.distributions.Normal(mean.repeat(1, 375, 375), std.repeat(1, 375, 375)).sample()
+    noise = torch.distributions.Normal(mean.repeat(1, resolution, resolution),
+                                       std.repeat(1, resolution, resolution)).sample()
     noise = imagenet_norm(noise)
     return noise
 

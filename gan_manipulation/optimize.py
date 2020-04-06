@@ -18,9 +18,6 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
         min_latent = min_latent.cuda()
         max_latent = max_latent.cuda()
 
-    # Alpha decay
-    alpha_decay = (alpha - 1e-3) / n_iter
-
     lowest_loss = 1000.0
     best_image = None
     best_latent = None
@@ -44,7 +41,7 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
             lowest_loss = loss.item()
 
         # Gradient update
-        step_size = alpha - i * alpha_decay
+        step_size = exp_interp(0, n_iter, alpha, 1e-3, 1/3, i)
         latent = update(latent, step_size)
 
         # Regularization
@@ -67,6 +64,14 @@ def update(x, step_size):
     x = x - step_size_scaled * x.grad
     x = x.detach()
     return x
+
+
+def exp_interp(a, b, c, d, k, x):
+    x = (x - a) / b
+    x = x.clip(min=1e-12)
+    e = x ** k
+    y = (1 - e) * c + e * d
+    return y
 
 
 def latent_params_for_model(model):

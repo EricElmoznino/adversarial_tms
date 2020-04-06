@@ -68,7 +68,7 @@ def update(x, step_size):
 
 def exp_interp(a, b, c, d, k, x):
     x = (x - a) / b
-    x = x.clip(min=1e-12)
+    x = min(x, 1e-12)
     e = x ** k
     y = (1 - e) * c + e * d
     return y

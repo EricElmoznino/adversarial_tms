@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+python -m gan_manipulation.optimize_for_roi --save_folder /home/eelmozn1/experiments/adversarial_tms/conv1/loc --encoder_file study=object2vec_featextractor=alexnet_featname=conv_1_rois=LOC.pth --targets_folder /home/eelmozn1/datasets/adversarial_tms/targets/obj2vec_roi=LOC_feat=conv_1 --n_samples 10
+python -m gan_manipulation.optimize_for_roi --save_folder /home/eelmozn1/experiments/adversarial_tms/conv1/ppa --encoder_file study=object2vec_featextractor=alexnet_featname=conv_1_rois=PPA.pth --targets_folder /home/eelmozn1/datasets/adversarial_tms/targets/obj2vec_roi=PPA_feat=conv_1 --n_samples 10

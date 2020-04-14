@@ -4,7 +4,7 @@ import os
 
 dir = '/home/eelmozn1/datasets/adversarial_tms'
 datasets = ['imagenet', 'coco', 'obj2vec']
-feature_names = ['conv_1', 'conv_2', 'conv_2', 'conv_3', 'pool']
+feature_names = ['conv_1', 'conv_2', 'conv_3', 'pool']
 rois = ['EVC', 'PPA', 'LOC', 'FFA']
 resolution = 256
 

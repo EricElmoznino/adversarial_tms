@@ -51,7 +51,7 @@ if __name__ == '__main__':
         loss_func = roi_loss_func(roi_mask=None, towards_target=True)
         targets = os.listdir(args.targets_folder)
         targets = [t for t in targets if t != '.DS_Store']
-        targets = [t for t in targets if '.target.pth' in t]
+        targets = [t for t in targets if '.pth' in t]
         for target_name in tqdm(targets):
             target = torch.load(os.path.join(args.targets_folder, target_name))
             save_path = os.path.join(args.save_folder, target_name.split('.')[0])

@@ -14,7 +14,7 @@ resolution = 375
 
 
 def voxel_data(subj_file, rois):
-    voxels = np.load(subj_file).item()
+    voxels = np.load(subj_file, allow_pickle=True).item()
     voxels = {c: [v[r] for r in rois] for c, v in voxels.items()}
     voxels = {c: np.concatenate(v) for c, v in voxels.items()}
     voxels = {c: torch.from_numpy(v) for c, v in voxels.items()}

@@ -22,6 +22,8 @@ def lstsq_regression(x_train, y_train, x_test, y_test):
 
 def grad_regression(x_train, y_train, x_test, y_test):
     model = RegressionModel(x_train.shape[1], y_train.shape[1])
+    if torch.cuda.is_available():
+        model.cuda()
     loss_func = nn.MSELoss()
     optimizer = optim.SGD(model.parameters(), lr=1e-4)
 

@@ -54,6 +54,8 @@ if __name__ == '__main__':
         feat_extractor = VGG16(args.feature_name)
     else:
         raise ValueError('unimplemented feature extractor: {}'.format(args.feature_extractor))
+    if torch.cuda.is_available():
+        feat_extractor.cuda()
 
     voxels = voxel_data(os.path.join(args.bold5000_folder, 'subj1.npy'), args.rois)
     features = condition_features(os.path.join(args.bold5000_folder, 'stimuli'), feat_extractor)

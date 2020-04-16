@@ -10,7 +10,7 @@ from models import Encoder, AlexNet, VGG16, RegressionModel
 from bold5000.regression import grad_regression, lstsq_regression
 
 random.seed(27)
-resolution = 375
+resolution = 256
 
 
 def voxel_data(subj_file, rois):

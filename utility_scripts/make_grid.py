@@ -3,10 +3,10 @@ import shutil
 from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms import functional as tr
 
-save_dir = '/home/eric/Desktop/gan_manipulations/bold5000/coco/conv3'
+save_dir = '/home/eric/Desktop/gan_manipulations/bold5000/blended/conv3'
 n_samples = 10
-generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/coco/conv3'
-orig_dir = '/home/eric/Documents/datasets/adversarial_tms/coco'
+generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/blended/conv3'
+orig_dir = '/home/eric/Documents/datasets/adversarial_tms/blended'
 rois = ['loc', 'ppa', 'random']
 
 res = 256

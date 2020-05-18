@@ -4,11 +4,11 @@ from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms import functional as tr
 import utils
 
-save_dir = '/home/eric/Desktop/gan_manipulations/bold5000/objectcats/conv3'
+save_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/grids/bold5000/scenecats/conv3'
 n_samples = 10
-generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/objectcats/conv3'
-orig_dir = '/home/eric/Documents/datasets/adversarial_tms/objectcats'
-rois = ['loc', 'ppa', 'random']
+generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/scenecats/conv3'
+orig_dir = '/home/eric/Documents/datasets/adversarial_tms/scenecats'
+rois = ['loc', 'ppa', 'opa', 'evc', 'random']
 
 res = 256
 sample_pad = 5

@@ -1,0 +1,108 @@
+body {
+  font-family: Arial, Helvetica;
+  font-size: 14pt;
+}
+
+.container{
+	position: relative;
+	top:5px;
+	margin: 0 auto;
+	width:700px;
+	border: 2px solid gray;
+	text-align: center;
+}
+
+#instructions{
+	margin: 0 auto;
+	width: 680px;
+	font-size: 16px;
+}
+
+#startExperiment {
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
+#startExperiment:hover {
+  color: white;
+}
+
+.button {
+  width: 200px;
+  text-align: center;
+  background: gray;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+#trial {
+  display: flex;
+  justify-content: center;
+  justify-content: center;
+  align-items:center;
+  position: relative;
+}
+
+.trialDisplay {
+  width: 400px;
+  height: 400px;
+}
+
+#targetImage {
+  display: none;
+  padding: 72px;
+}
+
+#fixation {
+  display: none;
+}
+
+#trialImage {
+  display: none;
+}
+
+#selection {
+  display: none;
+  position: relative;
+}
+
+.selectionButton {
+  background: gray;
+  position: absolute;
+}
+
+.selectionButton:hover {
+  background: lightgray;
+}
+
+#feedbackHighlights {
+  display: none;
+  position: absolute;
+}
+
+.feedbackBox {
+  position: absolute;
+  background-color: transparent;
+  border-style: solid;
+  border-width: 5px;
+}
+
+#correctHighlight {
+  border-color: green;
+}
+
+#incorrectHighlight {
+  border-color: red;
+}
+
+#feedbackText {
+  display: none;
+  text-align: center;
+}
+
+#trainEndWarning {
+  display: none;
+  text-align: center;
+  margin-top: 150px;
+  padding: 0px 200px;
+}

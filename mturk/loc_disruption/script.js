@@ -126,7 +126,6 @@ function startExperiment() {
     $('#instructionsContainer').hide();
     $('#trial').show();
 
-
     // Click events
 
     // User has selected a response (pressed a key)

@@ -1,0 +1,330 @@
+{
+  "trainTrials": [
+    {
+      "image": "mountain005_mountain",
+      "true": "mountain",
+      "foil": "mountain",
+      "answer": 4
+    },
+    {
+      "image": "mountain003_mountain",
+      "true": "mountain",
+      "foil": "mountain",
+      "answer": 2
+    },
+    {
+      "image": "mountain002_store",
+      "true": "mountain",
+      "foil": "store",
+      "answer": 2
+    },
+    {
+      "image": "mountain001_boathouse",
+      "true": "mountain",
+      "foil": "boathouse",
+      "answer": 5
+    },
+    {
+      "image": "boathouse005_boathouse",
+      "true": "boathouse",
+      "foil": "boathouse",
+      "answer": 3
+    },
+    {
+      "image": "boathouse003_boathouse",
+      "true": "boathouse",
+      "foil": "boathouse",
+      "answer": 5
+    },
+    {
+      "image": "boathouse000_mountain",
+      "true": "boathouse",
+      "foil": "mountain",
+      "answer": 5
+    },
+    {
+      "image": "boathouse001_store",
+      "true": "boathouse",
+      "foil": "store",
+      "answer": 2
+    },
+    {
+      "image": "store002_store",
+      "true": "store",
+      "foil": "store",
+      "answer": 3
+    },
+    {
+      "image": "store001_store",
+      "true": "store",
+      "foil": "store",
+      "answer": 1
+    },
+    {
+      "image": "store004_mountain",
+      "true": "store",
+      "foil": "mountain",
+      "answer": 5
+    },
+    {
+      "image": "store005_boathouse",
+      "true": "store",
+      "foil": "boathouse",
+      "answer": 5
+    }
+  ],
+  "experimentTrials": [
+    {
+      "image": "beach003_beach",
+      "true": "beach",
+      "foil": "beach",
+      "answer": 2,
+      "isCatch": false
+    },
+    {
+      "image": "beach000_beach",
+      "true": "beach",
+      "foil": "beach",
+      "answer": 4,
+      "isCatch": false
+    },
+    {
+      "image": "beach001_beach",
+      "true": "beach",
+      "foil": "beach",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "beach005_kitchen",
+      "true": "beach",
+      "foil": "kitchen",
+      "answer": 3,
+      "isCatch": false
+    },
+    {
+      "image": "beach002_street",
+      "true": "beach",
+      "foil": "street",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "beach004_office",
+      "true": "beach",
+      "foil": "office",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "street004_street",
+      "true": "street",
+      "foil": "street",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "street001_street",
+      "true": "street",
+      "foil": "street",
+      "answer": 3,
+      "isCatch": false
+    },
+    {
+      "image": "street000_street",
+      "true": "street",
+      "foil": "street",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "street005_beach",
+      "true": "street",
+      "foil": "beach",
+      "answer": 4,
+      "isCatch": false
+    },
+    {
+      "image": "street002_forest",
+      "true": "street",
+      "foil": "forest",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "street003_office",
+      "true": "street",
+      "foil": "office",
+      "answer": 5,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen005_kitchen",
+      "true": "kitchen",
+      "foil": "kitchen",
+      "answer": 4,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen000_kitchen",
+      "true": "kitchen",
+      "foil": "kitchen",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen004_kitchen",
+      "true": "kitchen",
+      "foil": "kitchen",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen003_office",
+      "true": "kitchen",
+      "foil": "office",
+      "answer": 5,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen001_forest",
+      "true": "kitchen",
+      "foil": "forest",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "kitchen002_building",
+      "true": "kitchen",
+      "foil": "building",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "forest004_forest",
+      "true": "forest",
+      "foil": "forest",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "forest003_forest",
+      "true": "forest",
+      "foil": "forest",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "forest000_forest",
+      "true": "forest",
+      "foil": "forest",
+      "answer": 5,
+      "isCatch": false
+    },
+    {
+      "image": "forest001_building",
+      "true": "forest",
+      "foil": "building",
+      "answer": 5,
+      "isCatch": false
+    },
+    {
+      "image": "forest005_office",
+      "true": "forest",
+      "foil": "office",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "forest002_beach",
+      "true": "forest",
+      "foil": "beach",
+      "answer": 2,
+      "isCatch": false
+    },
+    {
+      "image": "building004_building",
+      "true": "building",
+      "foil": "building",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "building000_building",
+      "true": "building",
+      "foil": "building",
+      "answer": 3,
+      "isCatch": false
+    },
+    {
+      "image": "building003_building",
+      "true": "building",
+      "foil": "building",
+      "answer": 2,
+      "isCatch": false
+    },
+    {
+      "image": "building002_beach",
+      "true": "building",
+      "foil": "beach",
+      "answer": 4,
+      "isCatch": false
+    },
+    {
+      "image": "building005_street",
+      "true": "building",
+      "foil": "street",
+      "answer": 0,
+      "isCatch": false
+    },
+    {
+      "image": "building001_forest",
+      "true": "building",
+      "foil": "forest",
+      "answer": 3,
+      "isCatch": false
+    },
+    {
+      "image": "office003_office",
+      "true": "office",
+      "foil": "office",
+      "answer": 2,
+      "isCatch": false
+    },
+    {
+      "image": "office000_office",
+      "true": "office",
+      "foil": "office",
+      "answer": 4,
+      "isCatch": false
+    },
+    {
+      "image": "office005_office",
+      "true": "office",
+      "foil": "office",
+      "answer": 2,
+      "isCatch": false
+    },
+    {
+      "image": "office002_forest",
+      "true": "office",
+      "foil": "forest",
+      "answer": 5,
+      "isCatch": false
+    },
+    {
+      "image": "office001_building",
+      "true": "office",
+      "foil": "building",
+      "answer": 1,
+      "isCatch": false
+    },
+    {
+      "image": "office004_beach",
+      "true": "office",
+      "foil": "beach",
+      "answer": 2,
+      "isCatch": false
+    }
+  ]
+}

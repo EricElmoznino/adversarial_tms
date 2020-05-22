@@ -1,330 +1,918 @@
 {
   "trainTrials": [
-    {
-      "image": "mountain005_mountain",
-      "true": "mountain",
-      "foil": "mountain",
-      "answer": 4
-    },
-    {
-      "image": "mountain003_mountain",
-      "true": "mountain",
-      "foil": "mountain",
-      "answer": 2
-    },
-    {
-      "image": "mountain002_store",
-      "true": "mountain",
-      "foil": "store",
-      "answer": 2
-    },
-    {
-      "image": "mountain001_boathouse",
-      "true": "mountain",
-      "foil": "boathouse",
-      "answer": 5
-    },
-    {
-      "image": "boathouse005_boathouse",
-      "true": "boathouse",
-      "foil": "boathouse",
-      "answer": 3
-    },
-    {
-      "image": "boathouse003_boathouse",
-      "true": "boathouse",
-      "foil": "boathouse",
-      "answer": 5
-    },
-    {
-      "image": "boathouse000_mountain",
-      "true": "boathouse",
-      "foil": "mountain",
-      "answer": 5
-    },
-    {
-      "image": "boathouse001_store",
-      "true": "boathouse",
-      "foil": "store",
-      "answer": 2
-    },
-    {
-      "image": "store002_store",
-      "true": "store",
-      "foil": "store",
-      "answer": 3
-    },
-    {
-      "image": "store001_store",
-      "true": "store",
-      "foil": "store",
-      "answer": 1
-    },
-    {
-      "image": "store004_mountain",
-      "true": "store",
-      "foil": "mountain",
-      "answer": 5
-    },
-    {
-      "image": "store005_boathouse",
-      "true": "store",
-      "foil": "boathouse",
-      "answer": 5
-    }
+    [
+      {
+        "image": "mountain007_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "mountain004_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "boathouse004_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "boathouse001_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "store001_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "store000_loc",
+        "roi": "loc",
+        "answer": 1
+      }
+    ],
+    [
+      {
+        "image": "mountain007_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "mountain004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "boathouse004_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "boathouse001_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "store001_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "store000_evc",
+        "roi": "evc",
+        "answer": 4
+      }
+    ],
+    [
+      {
+        "image": "mountain007_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "mountain004_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "boathouse004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "boathouse001_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "store001_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "store000_ppa",
+        "roi": "ppa",
+        "answer": 5
+      }
+    ]
   ],
   "experimentTrials": [
-    {
-      "image": "beach003_beach",
-      "true": "beach",
-      "foil": "beach",
-      "answer": 2,
-      "isCatch": false
-    },
-    {
-      "image": "beach000_beach",
-      "true": "beach",
-      "foil": "beach",
-      "answer": 4,
-      "isCatch": false
-    },
-    {
-      "image": "beach001_beach",
-      "true": "beach",
-      "foil": "beach",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "beach005_kitchen",
-      "true": "beach",
-      "foil": "kitchen",
-      "answer": 3,
-      "isCatch": false
-    },
-    {
-      "image": "beach002_street",
-      "true": "beach",
-      "foil": "street",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "beach004_office",
-      "true": "beach",
-      "foil": "office",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "street004_street",
-      "true": "street",
-      "foil": "street",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "street001_street",
-      "true": "street",
-      "foil": "street",
-      "answer": 3,
-      "isCatch": false
-    },
-    {
-      "image": "street000_street",
-      "true": "street",
-      "foil": "street",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "street005_beach",
-      "true": "street",
-      "foil": "beach",
-      "answer": 4,
-      "isCatch": false
-    },
-    {
-      "image": "street002_forest",
-      "true": "street",
-      "foil": "forest",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "street003_office",
-      "true": "street",
-      "foil": "office",
-      "answer": 5,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen005_kitchen",
-      "true": "kitchen",
-      "foil": "kitchen",
-      "answer": 4,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen000_kitchen",
-      "true": "kitchen",
-      "foil": "kitchen",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen004_kitchen",
-      "true": "kitchen",
-      "foil": "kitchen",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen003_office",
-      "true": "kitchen",
-      "foil": "office",
-      "answer": 5,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen001_forest",
-      "true": "kitchen",
-      "foil": "forest",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "kitchen002_building",
-      "true": "kitchen",
-      "foil": "building",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "forest004_forest",
-      "true": "forest",
-      "foil": "forest",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "forest003_forest",
-      "true": "forest",
-      "foil": "forest",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "forest000_forest",
-      "true": "forest",
-      "foil": "forest",
-      "answer": 5,
-      "isCatch": false
-    },
-    {
-      "image": "forest001_building",
-      "true": "forest",
-      "foil": "building",
-      "answer": 5,
-      "isCatch": false
-    },
-    {
-      "image": "forest005_office",
-      "true": "forest",
-      "foil": "office",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "forest002_beach",
-      "true": "forest",
-      "foil": "beach",
-      "answer": 2,
-      "isCatch": false
-    },
-    {
-      "image": "building004_building",
-      "true": "building",
-      "foil": "building",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "building000_building",
-      "true": "building",
-      "foil": "building",
-      "answer": 3,
-      "isCatch": false
-    },
-    {
-      "image": "building003_building",
-      "true": "building",
-      "foil": "building",
-      "answer": 2,
-      "isCatch": false
-    },
-    {
-      "image": "building002_beach",
-      "true": "building",
-      "foil": "beach",
-      "answer": 4,
-      "isCatch": false
-    },
-    {
-      "image": "building005_street",
-      "true": "building",
-      "foil": "street",
-      "answer": 0,
-      "isCatch": false
-    },
-    {
-      "image": "building001_forest",
-      "true": "building",
-      "foil": "forest",
-      "answer": 3,
-      "isCatch": false
-    },
-    {
-      "image": "office003_office",
-      "true": "office",
-      "foil": "office",
-      "answer": 2,
-      "isCatch": false
-    },
-    {
-      "image": "office000_office",
-      "true": "office",
-      "foil": "office",
-      "answer": 4,
-      "isCatch": false
-    },
-    {
-      "image": "office005_office",
-      "true": "office",
-      "foil": "office",
-      "answer": 2,
-      "isCatch": false
-    },
-    {
-      "image": "office002_forest",
-      "true": "office",
-      "foil": "forest",
-      "answer": 5,
-      "isCatch": false
-    },
-    {
-      "image": "office001_building",
-      "true": "office",
-      "foil": "building",
-      "answer": 1,
-      "isCatch": false
-    },
-    {
-      "image": "office004_beach",
-      "true": "office",
-      "foil": "beach",
-      "answer": 2,
-      "isCatch": false
-    }
+    [
+      {
+        "image": "beach008_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "beach004_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "beach003_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "beach005_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "beach000_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "beach002_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "beach006_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "beach007_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "beach001_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "street007_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "street006_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "street008_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "street001_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "street004_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "street003_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "street002_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "street000_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "street005_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "kitchen002_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "kitchen007_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen006_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "kitchen005_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "kitchen008_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "kitchen000_evc",
+        "roi": "evc",
+        "answer": 0
+      },
+      {
+        "image": "kitchen001_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "kitchen003_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "forest007_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "forest001_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "forest003_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "forest004_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "forest008_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "forest005_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "forest006_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "forest002_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "forest000_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "building008_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "building003_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "building002_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "building007_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "building006_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "building001_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "building005_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "building000_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "building004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "office006_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "office007_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "office004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "office000_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "office003_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "office008_evc",
+        "roi": "evc",
+        "answer": 0
+      },
+      {
+        "image": "office002_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "office001_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "office005_evc",
+        "roi": "evc",
+        "answer": 4
+      }
+    ],
+    [
+      {
+        "image": "beach008_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "beach004_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "beach003_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "beach005_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "beach000_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "beach002_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "beach006_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "beach007_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "beach001_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "street007_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "street006_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "street008_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "street001_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "street004_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "street003_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "street002_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "street000_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "street005_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "kitchen002_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "kitchen007_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "kitchen006_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "kitchen005_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen008_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "kitchen000_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "kitchen001_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "kitchen003_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "kitchen004_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "forest007_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "forest001_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "forest003_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "forest004_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "forest008_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "forest005_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "forest006_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "forest002_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "forest000_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "building008_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "building003_evc",
+        "roi": "evc",
+        "answer": 0
+      },
+      {
+        "image": "building002_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "building007_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "building006_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "building001_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "building005_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "building000_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "building004_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "office006_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "office007_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "office004_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "office000_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "office003_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "office008_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "office002_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "office001_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "office005_ppa",
+        "roi": "ppa",
+        "answer": 2
+      }
+    ],
+    [
+      {
+        "image": "beach008_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "beach004_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "beach003_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "beach005_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "beach000_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "beach002_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "beach006_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "beach007_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "beach001_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "street007_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "street006_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "street008_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "street001_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "street004_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "street003_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "street002_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "street000_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "street005_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen002_evc",
+        "roi": "evc",
+        "answer": 0
+      },
+      {
+        "image": "kitchen007_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "kitchen006_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen005_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "kitchen008_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "kitchen000_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "kitchen001_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "kitchen003_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "kitchen004_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "forest007_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "forest001_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "forest003_loc",
+        "roi": "loc",
+        "answer": 3
+      },
+      {
+        "image": "forest004_evc",
+        "roi": "evc",
+        "answer": 3
+      },
+      {
+        "image": "forest008_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "forest005_loc",
+        "roi": "loc",
+        "answer": 2
+      },
+      {
+        "image": "forest006_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "forest002_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "forest000_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "building008_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "building003_ppa",
+        "roi": "ppa",
+        "answer": 1
+      },
+      {
+        "image": "building002_loc",
+        "roi": "loc",
+        "answer": 4
+      },
+      {
+        "image": "building007_evc",
+        "roi": "evc",
+        "answer": 4
+      },
+      {
+        "image": "building006_ppa",
+        "roi": "ppa",
+        "answer": 3
+      },
+      {
+        "image": "building001_loc",
+        "roi": "loc",
+        "answer": 5
+      },
+      {
+        "image": "building005_evc",
+        "roi": "evc",
+        "answer": 1
+      },
+      {
+        "image": "building000_ppa",
+        "roi": "ppa",
+        "answer": 4
+      },
+      {
+        "image": "building004_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "office006_evc",
+        "roi": "evc",
+        "answer": 2
+      },
+      {
+        "image": "office007_ppa",
+        "roi": "ppa",
+        "answer": 2
+      },
+      {
+        "image": "office004_loc",
+        "roi": "loc",
+        "answer": 1
+      },
+      {
+        "image": "office000_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "office003_ppa",
+        "roi": "ppa",
+        "answer": 0
+      },
+      {
+        "image": "office008_loc",
+        "roi": "loc",
+        "answer": 0
+      },
+      {
+        "image": "office002_evc",
+        "roi": "evc",
+        "answer": 5
+      },
+      {
+        "image": "office001_ppa",
+        "roi": "ppa",
+        "answer": 5
+      },
+      {
+        "image": "office005_loc",
+        "roi": "loc",
+        "answer": 1
+      }
+    ]
   ]
 }

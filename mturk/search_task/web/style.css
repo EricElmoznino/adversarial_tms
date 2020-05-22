@@ -5,16 +5,25 @@ body {
 
 .container{
 	position: relative;
+	display: flex;
+	flex-wrap: wrap;
 	top:5px;
 	margin: 0 auto;
-	width:700px;
+	max-width:1000px;
 	border: 2px solid gray;
 	text-align: center;
+    align-items:center;
 }
 
 #instructions{
 	margin: 0 auto;
 	width: 680px;
+	font-size: 16px;
+}
+
+#instructionsImage{
+	margin: 20;
+	max-width: 960px;
 	font-size: 16px;
 }
 
@@ -37,7 +46,6 @@ body {
 
 #trial {
   display: flex;
-  justify-content: center;
   justify-content: center;
   align-items:center;
   position: relative;

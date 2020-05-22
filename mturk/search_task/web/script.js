@@ -1,12 +1,20 @@
+let debug = true;
+let hideInstructions = false;
+
 /* Parameters */
-let nTrials = null;
-let targetTime = 2000;
-let fixationTime = 2000;
-let feedbackTime = 3000;
-let rootPath = "";
-let showInstructions = false;
+let rootPath = "https://roi-manipulation.s3.amazonaws.com/searchtask/";
+if (debug) {
+    rootPath = "";
+}
+let targetTimeTrain = 2000;
+let targetTimeExp = 500;
+let fixationTime = 500;
+let feedbackTimeTrain = 2000;
+let feedbackTimeExp = 1000;
+let numHitSets = 3;
 
 /* Globals */
+var nTrials = null;
 var trials = [];
 var imageLocations;
 var curTrial = 0;
@@ -19,16 +27,18 @@ var training = true;
 
 /* Responses */
 var trialImages = [];
+var rois = [];
 var reactionTimes = [];
 var responses = [];
-var isCatchs = [];
+var corrects = [];
 
 function trialDone() {
     if (!training) {
         reactionTimes.push(reactionTime);
         responses.push(response);
+        corrects.push(response === trials[curTrial]["answer"] ? 1 : 0)
         trialImages.push(trials[curTrial]["image"]);
-        isCatchs.push(trials[curTrial]["isCatch"]);
+        rois.push(trials[curTrial]["roi"]);
     }
 
     if (curTrial === nTraining - 1) {
@@ -62,6 +72,11 @@ function trialBegin() {
     $('#targetImage').attr("src", trials[curTrial]["targetImageData"].src);
     $('#trialImage').attr("src", trials[curTrial]["trialImageData"].src);
 
+    var targetTime = targetTimeExp;
+    if (training) {
+        targetTime = targetTimeTrain;
+    }
+
     $("#targetImage").show();
     setTimeout(function () {
         $("#targetImage").hide();
@@ -91,12 +106,7 @@ function responseCallback(responseVal) {
     return function () {
         $("#selection").hide();
         response = responseVal;
-
-        if (training) {
-            showFeedback(trialDone);
-        } else {
-            trialDone();
-        }
+        showFeedback(trialDone);
     };
 }
 
@@ -122,6 +132,11 @@ function showFeedback(callback) {
     };
     placeHighlight($("#correctHighlight"), imageLocations[answer]);
     placeHighlight($("#incorrectHighlight"), imageLocations[response]);
+
+    var feedbackTime = feedbackTimeExp;
+    if (training) {
+        feedbackTime = feedbackTimeTrain;
+    }
 
     $("#trialImage").show();
     $("#feedbackHighlights").show();
@@ -150,19 +165,22 @@ function doneExperiment() {
 
 function exportData() {
     $('#trialImages').val(trialImages.join());
+    $('#rois').val(rois.join());
     $('#reactionTimes').val(reactionTimes.join());
     $('#responses').val(responses.join());
-    $('#isCatchs').val(isCatchs.join());
+    $('#corrects').val(corrects.join());
     var curTime = new Date();
     var experimentTime = curTime - experimentStartTime;
     $('#experimentTime').val(experimentTime);
+    $("#hitSetId").val(hitSetId);
 }
 
 /* Setup/preloading code */
 function getTrials(callback) {
+    hitSetId = getRandomInt(0, numHitSets - 1);
     $.getJSON(rootPath + "assets/trialData.json", function (data) {
-        var trainTrials = shuffle(data["trainTrials"]);
-        var expTrials = shuffle(data["experimentTrials"]);
+        var trainTrials = shuffle(data["trainTrials"][hitSetId]);
+        var expTrials = shuffle(data["experimentTrials"][hitSetId]);
         nTraining = trainTrials.length;
         trials = trainTrials.concat(expTrials);
         nTrials = trials.length;
@@ -254,7 +272,7 @@ $(document).ready(function () {
     getTrials(function () {
         preloadStimuli(function () {
             makeSelectionButtons(function () {
-                if (showInstructions) {
+                if (!hideInstructions) {
                     $("#startExperiment").click(function () {
                         if ($("#consent").prop("checked") === false) {
                             return;
@@ -273,4 +291,10 @@ $(document).ready(function () {
 function shuffle(o) {
     for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) ;
     return o;
+}
+
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }

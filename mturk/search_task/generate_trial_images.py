@@ -37,6 +37,7 @@ if __name__ == '__main__':
     parser.add_argument('--save_dir', required=True, type=str, help='directory to save the trial images')
     parser.add_argument('--radius', default=400, type=int, help='radius of trial centre to image centres')
     parser.add_argument('--img_size', default=256, type=int, help='size of images in trial')
+    parser.add_argument('--grayscale', action='store_true', help='make all images grayscale')
     args = parser.parse_args()
 
     shutil.rmtree(args.save_dir, ignore_errors=True)
@@ -55,6 +56,9 @@ if __name__ == '__main__':
         target_idx = [i for i, img in enumerate(images) if '_target.' in img][0]
         images = [Image.open(img) for img in images]
         images = [tr.resize(img, args.img_size) for img in images]
+
+        if args.grayscale:
+            images = [img.convert('L') for img in images]
 
         trial_image, image_locations = make_trial_image(images, args.radius)
 

@@ -5,8 +5,19 @@
 <div class="container" id="instructionsContainer">
     <div id="instructions">
         <h2>Welcome to our study!</h2>
-        <p>This is a psychology experiment in which you will be <b>presented images</b> for a very <b>short interval</b>, after which you will need to <b>classify</b> what you saw by choosing between two options. You will be able to select your option by using the <b>'F'</b> and <b>'J'</b> keys on your keyboard. After you make your selection, you will be able to press the <b>'Space'</b> key to continue to the next image. Some images will be presented for longer intervals than others. The task will take about <b>4 minutes</b> to complete.</p>
-        <p>Before the task begins, there will be a brief <b>training session</b>. This training session will be identical to the actual experiment in every way, except that your responses will not be recorded. The purpose of the training session is to give you a better understanding of the task.</p>
+        <p>This is a psychology experiment in which you will be <b>shown several images</b> and will need to
+            <b>select one target as quickly as possible</b>. As soon as you see the target image in the group, you will
+            need to press the <b>'Space'</b> bar to stop the timer. All images will then disappear, and you will have
+            to <b>use your mouse</b> to select the location where you saw the target image. Be as quick as you can for
+            pressing the 'Space' bar. You can take your time for selecting the location of the target image
+            with your mouse. You will get feedback about whether or not your answer was correct. Scroll down on this
+            page to see a pictorial description of the experiment.</p>
+        <p>Before the actual experiment begins, there will be a brief <b>training session</b>.
+            This training session will be identical to the actual experiment in every way, except that you will be
+            shown the target image and feedback for a longer duration. The purpose of the training session is to give
+            you a better understanding of the task.</p>
+        <p>There will be 6 training sessions and 54 sessions in the actual experiment. The entire task will take about
+            <b>4 minutes</b> to complete.</p>
         <h2>Consent</h2>
         <p>This task is completely anonymous. By completing the task, you are consenting to be in this research study. Your participation is voluntary and you can stop at any time. If you are ready, check the box below to indicate your consent.</p>
         <p><input type="checkbox" name="consent_check" value="agree" id="consent"> I agree to participate. </p>
@@ -14,6 +25,7 @@
             <a href="#" id="startExperiment">Ready to begin!</a>
         </div>
     </div>
+    <img id="instructionsImage", src="assets/instruction_image.png">
 </div>
 
 <div id="trial">
@@ -29,14 +41,18 @@
 <h2 id="feedbackText"></h2>
 <div id="trainEndWarning">
     <h2 style="color:red;">Warning!!!</h2>
-    <p>That was the last image in the training session. Once you press the <strong>'Space'</strong> bar, the real experiment will begin and you will no longer receive feedback about your answers.</p>
+    <p>That was the last image in the training session. Once you press the <strong>'Space'</strong> bar, the real
+        experiment will begin. Display time for both the <strong>target image</strong> and the
+        <strong>feedback</strong> will be shorter, so make sure to stay focused!</p>
 </div>
 
 <input type="hidden" id="trialImages" name="trialImages" value="">
+<input type="hidden" id="rois" name="rois" value="">
 <input type="hidden" id="reactionTimes" name="reactionTimes" value="">
 <input type="hidden" id="responses" name="responses" value="">
-<input type="hidden" id="isCatchs" name="isCatchs" value="">
+<input type="hidden" id="corrects" name="corrects" value="">
 <input type="hidden" id="experimentTime" name="" value="">
+<input type="hidden" id="hitSetId" name="hitSetId" value="">
 
 <!-- do not put this on Turk -->
 <input type="submit" id="submitButton">

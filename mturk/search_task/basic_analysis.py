@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 sns.set(style='whitegrid')
 
-result_file = 'may21.csv'
-rt_range = (0, 9000)
+result_file = 'personal.csv'
+rt_range = None
 
 
 def load_data():

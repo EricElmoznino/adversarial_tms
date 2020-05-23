@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, Helvetica;
+  font-size: 14pt;
+}
+
+.container{
+    display: flex;
+    position: relative;
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 20px;
+	border: 2px solid gray;
+	text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#instructions{
+	margin: 0 auto;
+	width: 680px;
+	font-size: 16px;
+}
+
+#startExperiment {
+  color: rgb(200,200,200);
+  text-decoration: none;
+}
+
+#startExperiment:hover {
+  color: white;
+}
+
+.button {
+  width: 200px;
+  text-align: center;
+  background: gray;
+  padding: 5px;
+  margin: 10px auto;
+}
+
+table {
+  text-align: center;
+  vertical-align: center;
+}
+
+#trialInstruction {
+  margin: 20px 0px;
+  font-size: 20;
+}
+
+.option {
+  margin: 0px 5px;
+}
+
+.option:hover {
+  cursor: pointer;
+  opacity: 0.75;
+}
+
+#trainEndWarning {
+  display: none;
+  text-align: center;
+}

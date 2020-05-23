@@ -1,0 +1,77 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" src="script.js"></script>
+
+<div class="container" id="instructionsContainer">
+    <div id="instructions">
+        <h2>Welcome to our study!</h2>
+        <p>
+            This is a psychology experiment in which you will be shown several target images and will need to
+            select one option among many that you think looks most like the target. Most of the time, the options will
+            look like abstract patterns and will not resemble anything real. Regardless, try your best to select the
+            option that you subjectively feel most resembles the target.
+        </p>
+        <p>
+            Before the actual experiment begins, there will be a brief training session.
+            This training session will be identical to the actual experiment in every way, except that your responses
+            will not be recorded. The purpose of the training session is to give you a better understanding of the task.
+        </p>
+        <p>
+            There will be 6 training trials and 54 trials in the actual experiment. The entire task will take about
+            <b>4 minutes</b> to complete.
+        </p>
+        <h2>Consent</h2>
+        <p>This task is completely anonymous. By completing the task, you are consenting to be in this research study. Your participation is voluntary and you can stop at any time. If you are ready, check the box below to indicate your consent.</p>
+        <p><input type="checkbox" name="consent_check" value="agree" id="consent"> I agree to participate. </p>
+        <div id="startExperimentButton" class="button">
+            <a href="#" id="startExperiment">Ready to begin!</a>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="trial">
+    <table id="trialDisplay">
+        <tr>
+            <td colspan="4">
+                <img id="origImage" width="200" src="">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4">
+                <p id="trialInstruction">Click on the image that looks most like the one above</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img id="option1Image" class="option" width="200" src="" onclick="trialDone(0)">
+            </td>
+            <td>
+                <img id="option2Image" class="option" width="200" src="" onclick="trialDone(1)">
+            </td>
+            <td>
+                <img id="option3Image" class="option" width="200" src="" onclick="trialDone(2)">
+            </td>
+            <td>
+                <img id="option4Image" class="option" width="200" src="" onclick="trialDone(3)">
+            </td>
+        </tr>
+    </table>
+    <div id="trainEndWarning">
+        <h2 style="color:red;">Warning!!!</h2>
+        <p>This was the last trial in the training session. The experiment begins with the next presented images.
+            Press the button below to confirm that you are ready to begin the experiment.</p>
+        <div id="endTrainingButton" class="button">
+            <a href="#" id="endTraining">Ready to begin!</a>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="trialImage" name="trialImage" value="">
+<input type="hidden" id="response" name="response" value="">
+<input type="hidden" id="responseButtonId" name="responseButtonId" value="">
+<input type="hidden" id="reactionTime" name="reactionTime" value="">
+<input type="hidden" id="isCatch" name="isCatch" value="">
+<input type="hidden" id="experimentTime" name="" value="">
+
+<!-- do not put this on Turk -->
+<input type="submit" id="submitButton">

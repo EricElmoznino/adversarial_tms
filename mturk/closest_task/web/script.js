@@ -20,8 +20,8 @@ var training = true;
 var trialImages = [];
 var responses = [];
 var responseButtonIds = [];
+var conditions = [];
 var reactionTimes = [];
-var isCatches = [];
 
 function trialDone(selection) {
     if (!training) {
@@ -29,7 +29,7 @@ function trialDone(selection) {
         responses.push(trials[curTrial]["roiOrder"][selection]);
         responseButtonIds.push(selection);
         reactionTimes.push((new Date()) - trialStartTime);
-        isCatches.push(trials[curTrial]["isCatch"] ? 1 : 0);
+        conditions.push(trials[curTrial]["condition"]);
     }
 
     if (curTrial === nTraining - 1) {
@@ -85,7 +85,7 @@ function exportData() {
     $('#response').val(responses.join());
     $('#responseButtonId').val(responseButtonIds.join());
     $('#reactionTime').val(reactionTimes.join());
-    $('#isCatch').val(isCatches.join());
+    $('#condition').val(conditions.join());
     var curTime = new Date();
     var experimentTime = curTime - experimentStartTime;
     $('#experimentTime').val(experimentTime);

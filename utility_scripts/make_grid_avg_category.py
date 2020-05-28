@@ -73,7 +73,7 @@ for category_name in categories:
     roi_columns = [make_roi_title(roi_name.upper()) for roi_name in rois]
     roi_dirs = [os.path.join(generated_dir, roi_name) for roi_name in rois]
     for sample in range(n_samples):
-        sample_name = category_name + '_{}.png'.format(sample)
+        sample_name = category_name + '_{}.jpg'.format(sample)
         for i in range(len(roi_columns)):
             image = load_image(os.path.join(roi_dirs[i], sample_name))
             roi_columns[i] = concat_v(roi_columns[i], image, sample_pad)

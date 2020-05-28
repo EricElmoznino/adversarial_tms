@@ -3,10 +3,10 @@ import shutil
 from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms import functional as tr
 
-save_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/grids/bold5000/mturkscenes/conv3'
+save_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/grids/bold5000/mturkobjects/conv3'
 n_samples = 10
-generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/mturkscenes/conv3'
-orig_dir = '/home/eric/Documents/datasets/adversarial_tms/mturkscenes'
+generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/mturkobjects/conv3'
+orig_dir = '/home/eric/Documents/datasets/adversarial_tms/mturkobjects'
 rois = ['loc', 'ppa', 'evc']
 
 res = 256
@@ -72,7 +72,7 @@ for image_name in images:
     roi_columns = [make_roi_title(roi_name.upper()) for roi_name in rois]
     roi_dirs = [os.path.join(generated_dir, roi_name) for roi_name in rois]
     for sample in range(n_samples):
-        sample_name = image_name.replace('.jpg', '_{}.png'.format(sample))
+        sample_name = image_name.replace('.jpg', '_{}.jpg'.format(sample))
         for i in range(len(roi_columns)):
             image = load_image(os.path.join(roi_dirs[i], sample_name))
             roi_columns[i] = concat_v(roi_columns[i], image, sample_pad)

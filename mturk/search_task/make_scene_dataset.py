@@ -44,8 +44,8 @@ for c in train_cats:
                     shutil.copy(orig_dir + '{}_{:03d}.jpg'.format(c, t),
                                 save_dir + trial_name + '/{:03d}_target.jpg'.format(i))
                 else:
-                    shutil.copy(generated_dir + '/' + roi + '/{}_{:03d}_{}.png'.format(c, num, foil_samples[i]),
-                                save_dir + trial_name + '/{:03d}.png'.format(i))
+                    shutil.copy(generated_dir + '/' + roi + '/{}_{:03d}_{}.jpg'.format(c, num, foil_samples[i]),
+                                save_dir + trial_name + '/{:03d}.jpg'.format(i))
 
 for c in exp_cats:
     target_nums = random.sample(range(n_per_cat), n_per_exp)
@@ -66,8 +66,8 @@ for c in exp_cats:
                     shutil.copy(orig_dir + '{}_{:03d}.jpg'.format(c, t),
                                 save_dir + trial_name + '/{:03d}_target.jpg'.format(i))
                 else:
-                    shutil.copy(generated_dir + '/' + roi + '/{}_{:03d}_{}.png'.format(c, num, foil_samples[i]),
-                                save_dir + trial_name + '/{:03d}.png'.format(i))
+                    shutil.copy(generated_dir + '/' + roi + '/{}_{:03d}_{}.jpg'.format(c, num, foil_samples[i]),
+                                save_dir + trial_name + '/{:03d}.jpg'.format(i))
 
 with open(save_dir + 'trialData.json', 'w') as f:
     f.write(json.dumps(trial_data, indent=2))

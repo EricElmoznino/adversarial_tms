@@ -2,10 +2,9 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 sns.set(style='whitegrid')
 
-result_file = 'personal.csv'
+result_file = 'may22.csv'
 rt_range = None
 
 
@@ -33,7 +32,7 @@ def load_data(keep_catches=False):
     data = expand_trials(data, trials_per_subj)
 
     if not keep_catches:
-        data = data[data['isCatch'] == 0]
+        data = data[data['isCatch'] == 1]
 
     return data
 

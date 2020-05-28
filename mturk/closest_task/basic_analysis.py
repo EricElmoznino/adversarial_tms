@@ -5,8 +5,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(style='whitegrid')
 
-result_file = 'may28.csv'
-aggregrated = False
+result_file = 'personal.csv'
+aggregated = True
 
 
 def load_data(catch_thresh=0.8):
@@ -46,10 +46,14 @@ data = load_data()
 
 # Plot frequencies of different ROIs
 plt.close()
-if aggregrated:
-    sns.catplot(kind='count', x='response', hue='condition', data=data)
+if aggregated:
+    g = sns.catplot(kind='count', x='response', hue='condition', hue_order=['scene', 'object'], data=data)
+    g.axes[0, 0].set_title('')
+    g.axes[0, 0].set_xlabel('')
+    g.axes[0, 0].set_ylabel('')
 else:
-    g = sns.catplot(kind='count', x='response', hue='condition', col='Subject', col_wrap=2, data=data)
+    g = sns.catplot(kind='count', x='response', hue='condition', hue_order=['scene', 'object'],
+                    col='Subject', col_wrap=2, data=data)
     for ax in g.axes:
         ax.set_title('')
         ax.set_xlabel('')

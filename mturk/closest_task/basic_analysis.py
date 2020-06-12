@@ -9,7 +9,7 @@ result_file = 'personal.csv'
 aggregated = True
 
 
-def load_data(catch_thresh=0.8):
+def load_data(catch_thresh=1.0):
     data_raw = pd.read_csv('results/' + result_file)
     data_raw['Subject'] = np.arange(1, len(data_raw) + 1)
     data_raw['response'] = data_raw['response'].apply(lambda x: x.upper())

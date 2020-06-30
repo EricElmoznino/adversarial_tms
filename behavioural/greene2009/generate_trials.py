@@ -17,12 +17,9 @@ os.mkdir(save_dir)
 for condition in rois + ['catch']:
     os.mkdir(os.path.join(save_dir, condition))
 
-# test_per_roi = 40
-# train_per_roi = 5
-# n_catch = 10
-test_per_roi = 2
-train_per_roi = 5
-n_catch = 2
+train_per_roi = 4
+test_per_roi = 30
+n_catch = 6
 
 trials = {}
 

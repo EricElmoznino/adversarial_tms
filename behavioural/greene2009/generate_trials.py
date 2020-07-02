@@ -6,7 +6,7 @@ import pandas as pd
 
 random.seed(27)
 
-attribute = 'concealment'
+attribute = 'depth'
 orig_dir = '/home/eric/datasets/adversarial_tms/greene2009'
 generated_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/greene2009/conv3'
 rois = ['loc', 'ppa']

@@ -88,9 +88,11 @@ def get_roi_mask(roi, encoder_file):
     return roi_mask
 
 
-def get_run_name(study, feature_extractor, feature_name, rois):
+def get_run_name(study, feature_extractor, feature_name, rois, subj=None):
     run_name = '_'.join(['study={}'.format(study),
                          'featextractor={}'.format(feature_extractor),
                          'featname={}'.format(feature_name),
                          'rois={}'.format(','.join(rois))])
+    if subj is not None:
+        run_name += '_subj={}'.format(subj)
     return run_name

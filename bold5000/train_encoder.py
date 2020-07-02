@@ -45,7 +45,8 @@ if __name__ == '__main__':
     parser.add_argument('--bold5000_folder', required=True, type=str, help='folder containing the stimuli images')
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='pool', type=str, help='feature extraction layer')
-    parser.add_argument('--rois', nargs='+', default=['LOC', 'PPA'], type=str, help='ROIs to fit')
+    parser.add_argument('--rois', nargs='+', default=['PPA'], type=str, help='ROIs to fit')
+    parser.add_argument('--subj', default='1', type=str, help='which subject\'s voxels to use ("all" for all subjects)')
     args = parser.parse_args()
 
     if args.feature_extractor == 'alexnet':
@@ -57,10 +58,10 @@ if __name__ == '__main__':
     if torch.cuda.is_available():
         feat_extractor.cuda()
 
-    voxels = voxel_data(os.path.join(args.bold5000_folder, 'subj1.npy'), args.rois)
+    voxels = voxel_data(os.path.join(args.bold5000_folder, 'subj{}.npy'.format(args.subj)), args.rois)
     features = condition_features(os.path.join(args.bold5000_folder, 'stimuli'), feat_extractor)
 
-    conditions = list(features.keys())
+    conditions = list(voxels.keys())
     random.shuffle(conditions)
     features = torch.stack([features[c] for c in conditions])
     voxels = torch.stack([voxels[c] for c in conditions])
@@ -88,5 +89,5 @@ if __name__ == '__main__':
 
     encoder = Encoder(feat_extractor, regressor)
     encoder.eval()
-    run_name = utils.get_run_name('bold5000', args.feature_extractor, args.feature_name, args.rois)
+    run_name = utils.get_run_name('bold5000', args.feature_extractor, args.feature_name, args.rois, args.subj)
     torch.save(encoder, os.path.join('saved_models', run_name + '.pth'))

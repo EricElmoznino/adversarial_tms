@@ -18,7 +18,8 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
         min_latent = min_latent.cuda()
         max_latent = max_latent.cuda()
 
-    lowest_loss = 1000.0
+    losses = []
+    lowest_loss = 1e9
     best_image = None
     best_latent = None
 
@@ -39,6 +40,7 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
             best_image = generated_image
             best_latent = latent
             lowest_loss = loss.item()
+        losses.append(loss.item())
 
         # Gradient update
         step_size = exp_interp(0, n_iter, alpha, 1e-3, 1/3, i)
@@ -55,7 +57,7 @@ def optimize(generator, encoder, target, loss_func, initial_latent=None,
     best_image = best_image.squeeze(0).clamp(min=0, max=1).cpu()
     best_latent = best_latent.squeeze(0).cpu()
 
-    return best_image, best_latent, lowest_loss
+    return best_image, best_latent, lowest_loss, losses
 
 
 def update(x, step_size):

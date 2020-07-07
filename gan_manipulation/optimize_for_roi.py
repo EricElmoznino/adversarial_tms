@@ -14,7 +14,7 @@ from disruption import roi_loss_func
 def generate_samples(save_path, generator, encoder, target, loss_func, n_samples):
     mean_loss = 0
     for i in range(n_samples):
-        generated_image, _, loss = optimize(generator, encoder, target, loss_func)
+        generated_image, _, loss, _ = optimize(generator, encoder, target, loss_func)
         generated_image = to_pil_image(generated_image)
         generated_image.save('{}_{}.jpg'.format(save_path, i))
         mean_loss += loss / n_samples

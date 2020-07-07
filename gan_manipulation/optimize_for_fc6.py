@@ -45,7 +45,7 @@ if __name__ == '__main__':
         with torch.no_grad():
             target = encoder(image.unsqueeze(0)).squeeze(0)
             target_mean_square = (target ** 2).mean().item()
-        generated_image, _, lowest_loss = optimize(generator, encoder, target, F.mse_loss)
+        generated_image, _, lowest_loss, _ = optimize(generator, encoder, target, F.mse_loss)
         generated_image = to_pil_image(generated_image)
         generated_image.save(os.path.join(args.save_folder, image_file))
         print('Lowest loss for {}:\t{}\nMean square of target for {}:\t{}\n'

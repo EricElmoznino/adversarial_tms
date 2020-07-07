@@ -2,13 +2,13 @@ import os
 import shutil
 from PIL import Image
 
-save_dir = '/home/eric/Desktop/gan_manipulations/bold5000/blended/conv3'
-generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/blended/conv3'
-objectdir = '/home/eric/Documents/datasets/adversarial_tms/objectcats'
-scenedir = '/home/eric/Documents/datasets/adversarial_tms/scenecats'
+save_dir = '/home/eric/Desktop/blended'
+generated_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/blended/conv3'
+objectdir = '/home/eric/datasets/adversarial_tms/objectcats'
+scenedir = '/home/eric/datasets/adversarial_tms/scenecats'
 rois = ['loc', 'ppa']
 
-res = 60
+res = 128
 cat_pad = 10
 sample_pad = 2
 
@@ -47,7 +47,7 @@ for roi in rois:
 
     for i, object in enumerate(objects):
         for j, scene in enumerate(scenes):
-            img = '_'.join([scene, object, '0.png'])
+            img = '_'.join([scene, object, '0.jpg'])
             img = os.path.join(generated_dir, roi, img)
             img = Image.open(img).resize((res, res))
             w = i * (res + sample_pad) + res + cat_pad

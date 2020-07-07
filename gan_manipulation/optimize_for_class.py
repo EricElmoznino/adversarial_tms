@@ -38,7 +38,7 @@ if __name__ == '__main__':
         generator.cuda()
 
     for c in tqdm(args.classes):
-        generated_image, _, best_act = optimize(generator, encoder, torch.zeros(1), get_loss_func_for_class(c))
+        generated_image, _, best_act, _ = optimize(generator, encoder, torch.zeros(1), get_loss_func_for_class(c))
         generated_image = to_pil_image(generated_image)
         generated_image.save(os.path.join(args.save_folder, 'class={:05d}.jpg'.format(c)))
         best_act = -best_act

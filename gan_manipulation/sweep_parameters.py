@@ -39,8 +39,8 @@ loss_func = roi_loss_func(roi_mask=None, towards_target=True)
 
 gen_images = []
 fig, axs = plt.subplots(len(alphas), len(decays), squeeze=False, figsize=(len(decays) * 10, len(alphas) * 5))
-for j, decay in enumerate(decays):
-    for i, alpha in tqdm(enumerate(alphas)):
+for i, alpha in tqdm(enumerate(alphas)):
+    for j, decay in enumerate(decays):
         gen_image, _, loss, losses = optimize(generator, encoder, target, loss_func,
                                               alpha=alpha, decay=decay)
         gen_images.append(to_pil_image(gen_image))

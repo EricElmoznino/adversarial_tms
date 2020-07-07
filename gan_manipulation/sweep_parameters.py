@@ -42,7 +42,7 @@ fig, axs = plt.subplots(len(alphas), len(decays), squeeze=False, figsize=(len(de
 for j, decay in enumerate(decays):
     for i, alpha in tqdm(enumerate(alphas)):
         gen_image, _, loss, losses = optimize(generator, encoder, target, loss_func,
-                                              alpha=alpha, decay=decay, n_iter=3)
+                                              alpha=alpha, decay=decay)
         gen_images.append(to_pil_image(gen_image))
 
         axs[i, j].plot(range(len(losses)), losses)

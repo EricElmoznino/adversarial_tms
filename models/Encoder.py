@@ -30,3 +30,20 @@ class Encoder(nn.Module):
 
     def set_roi_mask(self, roi_mask):
         self.roi_mask = torch.from_numpy(roi_mask.astype(np.uint8))
+
+
+class PCAEncoder(nn.Module):
+
+    def __init__(self, feature_extractor, pcs, mean):
+        super().__init__()
+
+        self.feature_extractor = feature_extractor
+        self.projection = nn.Linear(pcs.shape[1], pcs.shape[0], bias=False)
+        self.projection.weight.data = torch.from_numpy(pcs)
+        self.mean = nn.Parameter(data=torch.from_numpy(mean))
+
+    def forward(self, stimuli):
+        features = self.feature_extractor(stimuli)
+        centered_features = features - self.mean
+        pcs = self.projection(centered_features)
+        return pcs

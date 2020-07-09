@@ -10,7 +10,7 @@ resolution = 256
 
 for feat_name in feature_names:
     for roi in rois:
-        encoder = torch.load('saved_models/study=bold5000_featextractor=alexnet_featname={}_rois={}.pth'.format(feat_name, roi),
+        encoder = torch.load('saved_models/study=bold5000_featextractor=alexnet_featname={}_rois={}_subj=all.pth'.format(feat_name, roi),
                             map_location=lambda storage, loc: storage)
         for dataset in datasets:
             data_dir = os.path.join(dir, dataset)

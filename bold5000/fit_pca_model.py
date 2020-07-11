@@ -32,7 +32,7 @@ def condition_features(stimuli_folder, model):
 
 
 if __name__ == '__main__':
-    parser = ArgumentParser(description='Encoder using object2vec study data')
+    parser = ArgumentParser(description='PCA encoder using BOLD5000 study data')
     parser.add_argument('--bold5000_folder', required=True, type=str, help='folder containing the stimuli images')
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='conv_3', type=str, help='feature extraction layer')

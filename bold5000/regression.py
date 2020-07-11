@@ -46,8 +46,7 @@ def grad_regression(x_train, y_train, x_test, y_test):
             loss.backward()
             optimizer.step()
 
-        test_mse = []
-        test_r = []
+        y_preds = []
         for i in range(0, x_test.shape[0], batch_size):
             x_batch, y_batch = x_test[i:i + batch_size], y_test[i:i + batch_size]
             if torch.cuda.is_available():
@@ -55,14 +54,11 @@ def grad_regression(x_train, y_train, x_test, y_test):
 
             with torch.no_grad():
                 y_pred = model(x_batch)
+            y_preds.append(y_pred.cpu())
 
-            mse = loss_func(y_pred, y_batch)
-            r = correlation(y_pred, y_batch)
-            test_mse.append(mse)
-            test_r.append(r)
-
-        mean_mse = torch.stack(test_mse).mean().item()
-        mean_r = torch.stack(test_r).mean().item()
+        y_preds = torch.cat(y_preds, dim=0)
+        mean_mse = loss_func(y_preds, y_test).item()
+        mean_r = correlation(y_preds, y_test).item()
         print('[{} / {}]\tMSE: {:.3f}\tr: {:.3f}'.format(epoch, n_epochs, mean_mse, mean_r))
 
     print('\nFinished regression')
@@ -70,9 +66,7 @@ def grad_regression(x_train, y_train, x_test, y_test):
     return model.get_params(), mean_r
 
 
-def correlation(a, b, mean=True):
+def correlation(a, b):
     zs = lambda v: (v - v.mean(0)) / v.std(0)
-    r = (zs(a) * zs(b)).mean(axis=0)
-    if mean:
-        r = r.mean()
+    r = (zs(a) * zs(b)).mean()
     return r

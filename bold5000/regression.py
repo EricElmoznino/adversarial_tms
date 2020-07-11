@@ -70,7 +70,9 @@ def grad_regression(x_train, y_train, x_test, y_test):
     return model.get_params(), mean_r
 
 
-def correlation(a, b):
+def correlation(a, b, mean=True):
     zs = lambda v: (v - v.mean(0)) / v.std(0)
-    r = (zs(a) * zs(b)).mean()
+    r = (zs(a) * zs(b)).mean(axis=0)
+    if mean:
+        r = r.mean()
     return r

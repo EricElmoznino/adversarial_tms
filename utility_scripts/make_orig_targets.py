@@ -5,10 +5,9 @@ import shutil
 
 dir = '/home/eelmozn1/datasets/adversarial_tms'
 datasets = ['bao2020', 'blended', 'brady2008pcs_stubbiness',
-            'coco', 'greene2009_all', 'imagenet', 'obj2vec',
-            'size_and_clutter']
+            'coco', 'greene2009_all', 'imagenet', 'size_and_clutter']
 feature_names = ['conv_3']
-rois = ['PCA']
+rois = ['LOC_matched', 'PPA_matched']
 resolution = 256
 
 for feat_name in feature_names:

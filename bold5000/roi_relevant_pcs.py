@@ -5,7 +5,6 @@ from torch import nn
 from tqdm import tqdm
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_predict
-from models import RegressionModel
 import utils
 
 n_pcs = 10
@@ -62,7 +61,7 @@ r_order = np.argsort(r)[::-1][:n_pcs]
 print('{} most relevant PCs: \n{}PC prediction r: {}'.format(n_pcs, r_order, r[r_order]))
 
 pca_encoder.cpu()
-new_projection = nn.Linear(pcs.shape[1], n_pcs, bias=False)
+new_projection = nn.Linear(pca_encoder.projection.in_features, n_pcs, bias=False)
 new_projection.weight.data = pca_encoder.projection.weight.data[r_order, :]
 pca_encoder.projection = new_projection
 pca_encoder.eval()

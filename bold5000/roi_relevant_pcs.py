@@ -43,6 +43,8 @@ def correlation(a, b):
 
 
 pca_encoder = torch.load(os.path.join('saved_models', pca_encoder), map_location=lambda storage, loc: storage)
+if torch.cuda.is_available():
+    pca_encoder.cuda()
 
 voxels = voxel_data(os.path.join(bold5000_folder, 'subj1.npy'), roi)
 pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)

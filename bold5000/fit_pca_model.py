@@ -36,7 +36,7 @@ if __name__ == '__main__':
     parser.add_argument('--bold5000_folder', required=True, type=str, help='folder containing the stimuli images')
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='conv_3', type=str, help='feature extraction layer')
-    parser.add_argument('--n_pcs', default=1200, type=int, help='number of pcs to fit')
+    parser.add_argument('--n_pcs', default=400, type=int, help='number of pcs to fit')
     args = parser.parse_args()
 
     if args.feature_extractor == 'alexnet':

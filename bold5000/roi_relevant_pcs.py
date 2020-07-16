@@ -1,13 +1,16 @@
 import os
 import numpy as np
 import torch
+from torch import nn
 from tqdm import tqdm
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_predict
+from models import RegressionModel
 import utils
 
+n_pcs = 10
 roi = 'PPA'
-pca_encoder = 'study=bold5000_featextractor=alexnet_featname=conv_3_rois=PCA.pth'
+pca_encoder_name = 'study=bold5000_featextractor=alexnet_featname=conv_3_rois=PCA.pth'
 bold5000_folder = '/home/eelmozn1/datasets/adversarial_tms/bold5000'
 
 
@@ -42,7 +45,7 @@ def correlation(a, b):
     return r
 
 
-pca_encoder = torch.load(os.path.join('saved_models', pca_encoder), map_location=lambda storage, loc: storage)
+pca_encoder = torch.load(os.path.join('saved_models', pca_encoder_name), map_location=lambda storage, loc: storage)
 if torch.cuda.is_available():
     pca_encoder.cuda()
 
@@ -55,4 +58,12 @@ regr = LinearRegression()
 pred_pcs = cross_val_predict(regr, voxels, pcs, cv=5)
 r = correlation(pred_pcs, pcs)
 
+r_order = np.argsort(r)[::-1][:n_pcs]
+print('{} most relevant PCs: \n{}PC prediction r: {}'.format(n_pcs, r_order, r[r_order]))
 
+pca_encoder.cpu()
+new_projection = nn.Linear(pcs.shape[1], n_pcs, bias=False)
+new_projection.weight.data = pca_encoder.projection.weight.data[r_order, :]
+pca_encoder.projection = new_projection
+pca_encoder.eval()
+torch.save(pca_encoder, os.path.join('saved_models', pca_encoder_name.replace('.pth', '_{}-{}.pth'.format(roi, n_pcs))))

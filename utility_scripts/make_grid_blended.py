@@ -2,11 +2,11 @@ import os
 import shutil
 from PIL import Image
 
-save_dir = '/home/eric/Desktop/blended'
+save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/blended'
 generated_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/blended/conv3'
 objectdir = '/home/eric/datasets/adversarial_tms/objectcats'
 scenedir = '/home/eric/datasets/adversarial_tms/scenecats'
-rois = ['loc', 'ppa']
+rois = ['loc', 'loc_matched', 'ppa', 'ppa_matched', 'pca']
 
 res = 128
 cat_pad = 10

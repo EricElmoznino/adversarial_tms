@@ -5,9 +5,9 @@ from PIL import Image
 from torchvision.transforms import functional as tr
 import pandas as pd
 
-save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/greene2009/conv3/loc'
+save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/greene2009/conv3/ppa_matched'
 orig_dir = '/home/eric/datasets/adversarial_tms/greene2009'
-gen_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/greene2009/conv3/loc'
+gen_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/greene2009/conv3/ppa_matched'
 
 res = 128
 sample_pad = 2

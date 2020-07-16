@@ -3,11 +3,11 @@ import shutil
 from PIL import Image, ImageDraw, ImageFont
 from torchvision.transforms import functional as tr
 
-save_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/grids/bold5000/mturkobjects/conv3'
-n_samples = 10
-generated_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/mturkobjects/conv3'
-orig_dir = '/home/eric/Documents/datasets/adversarial_tms/mturkobjects'
-rois = ['loc', 'ppa', 'evc']
+save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/imagenet/conv3'
+n_samples = 1
+generated_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/imagenet/conv3'
+orig_dir = '/home/eric/datasets/adversarial_tms/imagenet'
+rois = ['loc', 'loc_matched', 'ppa', 'ppa_matched', 'pca']
 
 res = 256
 sample_pad = 5

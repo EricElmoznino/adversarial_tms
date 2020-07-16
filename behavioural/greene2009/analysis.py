@@ -7,8 +7,8 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 sns.set(style='whitegrid')
 
-attribute = 'concealment'
-aggregated = False
+attribute = 'depth'
+aggregated = True
 
 
 def load_data(catch_thresh=None):

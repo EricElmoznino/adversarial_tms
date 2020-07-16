@@ -4,9 +4,9 @@ import math
 from PIL import Image
 from torchvision.transforms import functional as tr
 
-save_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/grids/bold5000/size_and_clutter/fc1/ppa'
-orig_dir = '/home/eric/Documents/datasets/adversarial_tms/size_and_clutter'
-gen_dir = '/home/eric/Documents/experiments/adversarial_tms/gan_manipulations/bold5000/size_and_clutter/fc1/ppa'
+save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/size_and_clutter/conv3/pca'
+orig_dir = '/home/eric/datasets/adversarial_tms/size_and_clutter'
+gen_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/size_and_clutter/conv3/pca'
 
 res = 128
 sample_pad = 2

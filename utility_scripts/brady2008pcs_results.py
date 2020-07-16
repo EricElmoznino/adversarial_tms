@@ -5,7 +5,7 @@ from PIL import Image
 from torchvision.transforms import functional as tr
 
 pc = 'stubbiness'
-roi = 'loc'
+roi = 'pca'
 save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/brady2008pcs/{}/{}'.format(pc, roi)
 orig_dir = '/home/eric/datasets/adversarial_tms/brady2008pcs/{}'.format(pc)
 gen_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/brady2008pcs_{}/{}'.format(pc, roi)

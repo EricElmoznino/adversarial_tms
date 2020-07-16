@@ -14,7 +14,6 @@ bold5000_folder = '/home/eelmozn1/datasets/adversarial_tms/bold5000'
 def voxel_data(subj_file, roi):
     voxels = np.load(subj_file, allow_pickle=True).item()
     voxels = {c: v[roi] for c, v in voxels.items()}
-    voxels = {c: np.concatenate(v) for c, v in voxels.items()}
     return voxels
 
 

@@ -48,8 +48,8 @@ if torch.cuda.is_available():
 
 voxels = voxel_data(os.path.join(bold5000_folder, 'subj1.npy'), roi)
 pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)
-pcs = np.concatenate([pcs[c] for c in voxels], axis=0)
-voxels = np.concatenate([voxels[c] for c in voxels], axis=0)
+pcs = np.stack([pcs[c] for c in voxels], axis=0)
+voxels = np.stack([voxels[c] for c in voxels], axis=0)
 
 regr = LinearRegression()
 pred_pcs = cross_val_predict(regr, voxels, pcs, cv=5)

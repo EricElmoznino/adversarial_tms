@@ -47,3 +47,18 @@ class PCAEncoder(nn.Module):
         centered_features = features - self.mean
         pcs = self.projection(centered_features)
         return pcs
+
+
+class CCAEncoder(nn.Module):
+
+    def __init__(self, pca_encoder, rotations):
+        super().__init__()
+
+        self.pca_encoder = pca_encoder
+        self.rotation = nn.Linear(rotations.shape[1], rotations.shape[0], bias=False)
+        self.rotation.weight.data = torch.from_numpy(rotations.T)
+
+    def forward(self, stimuli):
+        pcs = self.pca_encoder(stimuli)
+        transformed = self.rotation(pcs)
+        return transformed

@@ -1,13 +1,12 @@
 import os
 import numpy as np
 import torch
-from torch import nn
 from tqdm import tqdm
-from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import cross_val_predict
+from sklearn.cross_decomposition import CCA
+from models import CCAEncoder
 import utils
 
-n_pcs = 10
+n_components = 100
 roi = 'PPA'
 pca_encoder_name = 'study=bold5000_featextractor=alexnet_featname=conv_3_rois=PCA.pth'
 bold5000_folder = '/home/eelmozn1/datasets/adversarial_tms/bold5000'
@@ -53,16 +52,12 @@ pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)
 pcs = np.stack([pcs[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
 
-regr = LinearRegression()
-pred_pcs = cross_val_predict(regr, voxels, pcs, cv=5)
-r = correlation(pred_pcs, pcs)
-
-r_order = np.argsort(r)[::-1][:n_pcs].copy()
-print('{} most relevant PCs: \n{}PC prediction r: {}'.format(n_pcs, r_order, r[r_order]))
+assert (pcs.mean(axis=0) == 0).all()
+cca = CCA(n_components=n_components, scale=False)
+x_scores, y_scores = cca.fit_transform(voxels, pcs)
+r = correlation(x_scores, y_scores)
+print('Score correlations\nMean: {}\nMax: {}\nMin: {}'.format(r.mean(), r.max(), r.min()))
 
 pca_encoder.cpu()
-new_projection = nn.Linear(pca_encoder.projection.in_features, n_pcs, bias=False)
-new_projection.weight.data = pca_encoder.projection.weight.data[r_order, :]
-pca_encoder.projection = new_projection
-pca_encoder.eval()
-torch.save(pca_encoder, os.path.join('saved_models', pca_encoder_name.replace('.pth', '_{}-{}.pth'.format(roi, n_pcs))))
+cca_encoder = CCAEncoder(pca_encoder, cca.y_rotations_)
+torch.save(cca_encoder, os.path.join('saved_models', pca_encoder_name.replace('PCA.pth', 'CCA.pth')))

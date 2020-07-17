@@ -60,4 +60,4 @@ print('Score correlations\nMean: {}\nMax: {}\nMin: {}'.format(r.mean(), r.max(),
 
 pca_encoder.cpu()
 cca_encoder = CCAEncoder(pca_encoder, cca.y_rotations_)
-torch.save(cca_encoder, os.path.join('saved_models', pca_encoder_name.replace('PCA.pth', 'CCA.pth')))
+torch.save(cca_encoder, os.path.join('saved_models', pca_encoder_name.replace('PCA.pth', 'CCA-{}.pth'.format(roi))))

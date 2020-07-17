@@ -52,7 +52,7 @@ pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)
 pcs = np.stack([pcs[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
 
-assert (pcs.mean(axis=0) == 0).all()
+assert (pcs.mean(axis=0) < 1e-5).all()
 cca = CCA(n_components=n_components, scale=False)
 x_scores, y_scores = cca.fit_transform(voxels, pcs)
 r = correlation(x_scores, y_scores)

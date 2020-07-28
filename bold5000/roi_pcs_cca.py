@@ -7,7 +7,7 @@ from sklearn.model_selection import KFold
 from models import CCAEncoder
 import utils
 
-n_components = 100
+n_components = 25
 roi = 'PPA'
 pca_encoder_name = 'study=bold5000_featextractor=alexnet_featname=conv_3_rois=PCA.pth'
 bold5000_folder = '/home/eelmozn1/datasets/adversarial_tms/bold5000'
@@ -70,8 +70,8 @@ for train_idx, val_idx in cv.split(pcs):
 cv_train_r = np.stack(cv_train_r).mean(axis=0)
 cv_val_r = np.stack(cv_val_r).mean(axis=0)
 print('Cross-validated score correlations\n'
-      'Train: Mean = {}\tMax = {}\tMin = {}\n'
-      'Val: Mean = {}\tMax = {}\tMin = {}\n'
+      'Train: Mean={:.3g} Max={:.3g} Min={:.3g}\n'
+      'Val: Mean={:.3g} Max={:.3g} Min={:.3g}\n'
       .format(cv_train_r.mean(), cv_train_r.max(), cv_train_r.min(),
               cv_val_r.mean(), cv_val_r.max(), cv_val_r.min()))
 

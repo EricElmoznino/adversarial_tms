@@ -3,6 +3,7 @@ import numpy as np
 import torch
 from tqdm import tqdm
 from sklearn.cross_decomposition import CCA
+from sklearn.model_selection import KFold
 from models import CCAEncoder
 import utils
 
@@ -51,13 +52,30 @@ voxels = voxel_data(os.path.join(bold5000_folder, 'subj1.npy'), roi)
 pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)
 pcs = np.stack([pcs[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
-
 assert (pcs.mean(axis=0) < 1e-5).all()
-cca = CCA(n_components=n_components, scale=False)
-x_scores, y_scores = cca.fit_transform(voxels, pcs)
-r = correlation(x_scores, y_scores)
-print('Score correlations\nMean: {}\nMax: {}\nMin: {}'.format(r.mean(), r.max(), r.min()))
 
+cca = CCA(n_components=n_components, scale=False)
+
+cv = KFold(n_splits=5, shuffle=True, random_state=27)
+cv_train_r, cv_val_r = [], []
+for train_idx, val_idx in cv.split(pcs):
+    pcs_train, pcs_val = pcs[train_idx], pcs[val_idx]
+    voxels_train, voxels_val = voxels[train_idx], voxels[val_idx]
+    cca.fit(voxels_train, pcs_train)
+    x_scores_train, y_scores_train = cca.transform(voxels_train, pcs_train)
+    x_scores_val, y_scores_val = cca.transform(voxels_val, pcs_val)
+    cv_train_r.append(correlation(x_scores_train, y_scores_train))
+    cv_val_r.append(correlation(x_scores_val, y_scores_val))
+
+cv_train_r = np.stack(cv_train_r).mean(axis=0)
+cv_val_r = np.stack(cv_val_r).mean(axis=0)
+print('Cross-validated score correlations\n'
+      'Train: Mean = {}\tMax = {}\tMin = {}\n'
+      'Val: Mean = {}\tMax = {}\tMin = {}\n'
+      .format(cv_train_r.mean(), cv_train_r.max(), cv_train_r.min(),
+              cv_val_r.mean(), cv_val_r.max(), cv_val_r.min()))
+
+x_scores, y_scores = cca.fit_transform(voxels, pcs)
 pca_encoder.cpu()
 cca_encoder = CCAEncoder(pca_encoder, cca.y_rotations_.astype(np.float32))
 torch.save(cca_encoder, os.path.join('saved_models', pca_encoder_name.replace('PCA.pth', 'CCA-{}.pth'.format(roi))))

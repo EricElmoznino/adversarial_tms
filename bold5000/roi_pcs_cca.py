@@ -54,13 +54,13 @@ features = np.stack([features[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
 
 pca = PCA(n_components=400)
-pcs = pca.fit_transform(features)
+pca.fit_transform(features)
+pcs = pca.transform(features)
 print('\nPCA Mean Explained Variance: {:.4f}'.format(np.mean(pca.explained_variance_ratio_.mean())))
 pca_encoder = PCAEncoder(feat_extractor, pcs=pca.components_, mean=pca.mean_)
 
 cca = CCA(n_components=n_components, scale=False)
 
-assert (pcs.mean(axis=0) < 1e-5).all()
 cv = KFold(n_splits=5, shuffle=True, random_state=27)
 cv_train_r, cv_val_r = [], []
 for train_idx, val_idx in cv.split(pcs):

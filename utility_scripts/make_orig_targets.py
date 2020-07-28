@@ -4,9 +4,9 @@ import os
 import shutil
 
 dir = '/home/eelmozn1/datasets/adversarial_tms'
-datasets = ['coco', 'greene2009_all', 'bao2020', 'brady2008pcs_stubbiness']
+datasets = ['coco', 'greene2009_all', 'bao2020', 'brady2008pcs_stubbiness', 'blended']
 feature_names = ['conv_3']
-rois = ['CCA-LOC', 'CCA-PPA']
+rois = ['CCA-LOC', 'CCA-PPA', 'CCA-LOC-allsubj', 'CCA-PPA-allsubj']
 resolution = 256
 
 for feat_name in feature_names:

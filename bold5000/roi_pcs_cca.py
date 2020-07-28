@@ -2,15 +2,16 @@ import os
 import numpy as np
 import torch
 from tqdm import tqdm
+from sklearn.decomposition import PCA
 from sklearn.cross_decomposition import CCA
 from sklearn.model_selection import KFold
-from models import CCAEncoder
+from models import CCAEncoder, PCAEncoder, AlexNet
 import utils
 
-n_components = 25
+n_components = 10
 roi = 'PPA'
-pca_encoder_name = 'study=bold5000_featextractor=alexnet_featname=conv_3_rois=PCA.pth'
 bold5000_folder = '/home/eelmozn1/datasets/adversarial_tms/bold5000'
+feat_extractor = AlexNet('conv_3')
 
 
 def voxel_data(subj_file, roi):
@@ -44,18 +45,22 @@ def correlation(a, b):
     return r
 
 
-pca_encoder = torch.load(os.path.join('saved_models', pca_encoder_name), map_location=lambda storage, loc: storage)
 if torch.cuda.is_available():
-    pca_encoder.cuda()
+    feat_extractor.cuda()
 
 voxels = voxel_data(os.path.join(bold5000_folder, 'subj1.npy'), roi)
-pcs = condition_features(os.path.join(bold5000_folder, 'stimuli'), pca_encoder)
-pcs = np.stack([pcs[c] for c in voxels], axis=0)
+features = condition_features(os.path.join(bold5000_folder, 'stimuli'), feat_extractor)
+features = np.stack([features[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
-assert (pcs.mean(axis=0) < 1e-5).all()
+
+pca = PCA(n_components=400)
+pcs = pca.fit_transform(features)
+print('\nPCA Mean Explained Variance: {:.4f}'.format(np.mean(pca.explained_variance_ratio_.mean())))
+pca_encoder = PCAEncoder(feat_extractor, pcs=pca.components_, mean=pca.mean_)
 
 cca = CCA(n_components=n_components, scale=False)
 
+assert (pcs.mean(axis=0) < 1e-5).all()
 cv = KFold(n_splits=5, shuffle=True, random_state=27)
 cv_train_r, cv_val_r = [], []
 for train_idx, val_idx in cv.split(pcs):
@@ -78,4 +83,5 @@ print('Cross-validated score correlations\n'
 x_scores, y_scores = cca.fit_transform(voxels, pcs)
 pca_encoder.cpu()
 cca_encoder = CCAEncoder(pca_encoder, cca.y_rotations_.astype(np.float32))
-torch.save(cca_encoder, os.path.join('saved_models', pca_encoder_name.replace('PCA.pth', 'CCA-{}.pth'.format(roi))))
+save_name = utils.get_run_name('bold5000', 'alexnet', 'conv_3', ['CCA-{}'.format(roi)])
+torch.save(cca_encoder, os.path.join('saved_models', save_name + '.pth'))

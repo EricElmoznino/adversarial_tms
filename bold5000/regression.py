@@ -64,7 +64,7 @@ def grad_regression(x_train, y_train, x_test=None, y_test=None, l2_penalty=0):
         mean_r = correlation(y_preds, y_test).item()
         print('[{} / {}]\tMSE: {:.3f}\tr: {:.3f}'.format(epoch, n_epochs, mean_mse, mean_r))
 
-    print('\nFinished regression')
+    print('Finished regression')
 
     return model.get_params(), mean_r
 

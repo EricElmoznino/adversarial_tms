@@ -39,7 +39,7 @@ if __name__ == '__main__':
     parser = ArgumentParser(description='Encoder using BOLD5000 study data')
     parser.add_argument('--bold5000_folder', required=True, type=str, help='folder containing the stimuli images')
     parser.add_argument('--roi', required=True, type=str, help='ROI to fit')
-    parser.add_argument('--n_pcs', default=100, type=int, help='number of pcs to reduce voxel dimensions')
+    parser.add_argument('--n_pcs', default=100, type=int, help='number of pcs to select for encoder')
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='conv_3', type=str, help='feature extraction layer')
     parser.add_argument('--allsubj', action='store_true', help='whether or not to use all subjects')
@@ -72,9 +72,9 @@ if __name__ == '__main__':
         cv_r.append(r)
     print('\nFinal Mean r: {:.4f}'.format(np.mean(cv_r)))
 
-    w, _ = grad_regression(features, voxel_pcs, l2_penalty=args.l2)
+    w, _ = grad_regression(torch.from_numpy(features), torch.from_numpy(voxel_pcs), l2_penalty=args.l2)
     regressor = RegressionModel(features.shape[1], voxel_pcs.shape[1])
-    regressor.set_params(w)
+    regressor.set_params(w[:, :args.n_pcs])
 
     encoder = Encoder(feat_extractor, regressor)
     encoder.eval()

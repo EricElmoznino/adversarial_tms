@@ -27,6 +27,7 @@ def grad_regression(x_train, y_train, x_test=None, y_test=None, l2_penalty=0):
     loss_func = nn.MSELoss()
     optimizer = optim.SGD(model.parameters(), lr=1e-4, weight_decay=l2_penalty)
 
+    mean_r = None
     batch_size = 32
     n_epochs = 50
     indices = list(range(x_train.shape[0]))

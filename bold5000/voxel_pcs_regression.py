@@ -66,7 +66,7 @@ if __name__ == '__main__':
     cv = KFold(n_splits=5, shuffle=True, random_state=27)
     for train_idx, val_idx in cv.split(features):
         features_train, features_val = features[train_idx], features[val_idx]
-        voxel_pcs_train, voxel_pcs_val = voxel_pcs[train_idx], voxels[val_idx]
+        voxel_pcs_train, voxel_pcs_val = voxel_pcs[train_idx], voxel_pcs[val_idx]
         _, r = grad_regression(torch.from_numpy(features_train), torch.from_numpy(voxel_pcs_train),
                                torch.from_numpy(features_val), torch.from_numpy(voxel_pcs_val), l2_penalty=args.l2)
         cv_r.append(r)

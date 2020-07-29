@@ -4,7 +4,7 @@ import math
 from PIL import Image
 from torchvision.transforms import functional as tr
 
-rois = ['loc', 'ppa', 'loc_matched', 'ppa_matched', 'pca', 'pca_ppa-10', 'pca_loc-10', 'cca-ppa', 'cca-loc']
+rois = ['loc', 'ppa', 'cca-loc', 'cca-ppa', 'cca-loc-allsubj', 'cca-ppa-allsubj', 'pca']
 save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5000/bao2020'
 orig_dir = '/home/eric/datasets/adversarial_tms/bao2020'
 gen_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/bao2020'

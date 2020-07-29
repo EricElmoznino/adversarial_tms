@@ -20,12 +20,12 @@ def lstsq_regression(x_train, y_train, x_test, y_test):
     return w, r
 
 
-def grad_regression(x_train, y_train, x_test, y_test):
+def grad_regression(x_train, y_train, x_test=None, y_test=None, l2_penalty=0):
     model = RegressionModel(x_train.shape[1], y_train.shape[1])
     if torch.cuda.is_available():
         model.cuda()
     loss_func = nn.MSELoss()
-    optimizer = optim.SGD(model.parameters(), lr=1e-4)
+    optimizer = optim.SGD(model.parameters(), lr=1e-4, weight_decay=l2_penalty)
 
     batch_size = 32
     n_epochs = 50
@@ -45,6 +45,9 @@ def grad_regression(x_train, y_train, x_test, y_test):
             optimizer.zero_grad()
             loss.backward()
             optimizer.step()
+
+        if x_test is None:
+            continue
 
         y_preds = []
         for i in range(0, x_test.shape[0], batch_size):

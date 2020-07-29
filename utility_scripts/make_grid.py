@@ -7,7 +7,7 @@ save_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/grids/bold5
 n_samples = 1
 generated_dir = '/home/eric/experiments/adversarial_tms/gan_manipulations/bold5000/coco/conv3'
 orig_dir = '/home/eric/datasets/adversarial_tms/coco'
-rois = ['loc', 'ppa', 'cca-loc', 'cca-ppa', 'pca']
+rois = ['loc', 'ppa', 'cca-loc', 'cca-ppa', 'cca-loc-allsubj', 'cca-ppa-allsubj', 'pca']
 
 res = 256
 sample_pad = 5

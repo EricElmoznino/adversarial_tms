@@ -54,7 +54,7 @@ features = np.stack([features[c] for c in voxels], axis=0)
 voxels = np.stack([voxels[c] for c in voxels], axis=0)
 
 pca = PCA(n_components=400)
-pca.fit_transform(features)
+pca.fit(features)
 pcs = pca.transform(features)
 print('\nPCA Mean Explained Variance: {:.4f}'.format(np.mean(pca.explained_variance_ratio_.mean())))
 pca_encoder = PCAEncoder(feat_extractor, pcs=pca.components_, mean=pca.mean_)

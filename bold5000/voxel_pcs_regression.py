@@ -42,7 +42,7 @@ if __name__ == '__main__':
     parser.add_argument('--n_pcs', default=100, type=int, help='number of pcs to reduce voxel dimensions')
     parser.add_argument('--feature_extractor', default='alexnet', type=str, help='feature extraction model')
     parser.add_argument('--feature_name', default='conv_3', type=str, help='feature extraction layer')
-    parser.add_argument('--all_subj', action='store_true', help='whether or not to use all subjects')
+    parser.add_argument('--allsubj', action='store_true', help='whether or not to use all subjects')
     parser.add_argument('--l2', default=0, type=float, help='L2 regularization weight')
     args = parser.parse_args()
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
     if torch.cuda.is_available():
         feat_extractor.cuda()
 
-    subj_file = 'subjall.npy' if args.all_subj else 'subj1.npy'
+    subj_file = 'subjall.npy' if args.allsubj else 'subj1.npy'
     voxels, stimuli = voxel_data(os.path.join(args.bold5000_folder, subj_file), args.roi)
     voxel_pcs = PCA(n_components=voxels.shape[1]).fit_transform(voxels)
 
@@ -67,8 +67,8 @@ if __name__ == '__main__':
     for train_idx, val_idx in cv.split(features):
         features_train, features_val = features[train_idx], features[val_idx]
         voxel_pcs_train, voxel_pcs_val = voxel_pcs[train_idx], voxels[val_idx]
-        _, r = grad_regression(features_train, voxel_pcs_train,
-                               features_val, voxel_pcs_val, l2_penalty=args.l2)
+        _, r = grad_regression(torch.from_numpy(features_train), torch.from_numpy(voxel_pcs_train),
+                               torch.from_numpy(features_val), torch.from_numpy(voxel_pcs_val), l2_penalty=args.l2)
         cv_r.append(r)
     print('\nFinal Mean r: {:.4f}'.format(np.mean(cv_r)))
 
